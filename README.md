@@ -1,5 +1,5 @@
 # Physics Notes
-A repository to store notes for 2nd year physics courses at Durham university
+A repository to store notes for (2nd year) physics courses at Durham university
 
 ## Notes class
 
@@ -31,3 +31,7 @@ For each set of course notes, there will be a primary development branch (e.g. `
 Use 'm.' at the start of a commit to show a minor edit. e.g. spelling, format...
 
 Comment using '%' to show discussion within a file after the line it references 
+
+## Notation 
+
+Here we'll include the accepted use of notation for use in the equations of the document i.e. 'log' for the natural log.
