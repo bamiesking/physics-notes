@@ -1,4 +1,5 @@
 \subsection{Basic Principles}
+\title{The Night Sky}
 To start, we'll look at what one first sees when looking at the night sky: Stars. We first need some way of measuring how bright a star is. The problem is they are not the same distance away. We cannot have the notion of the 'absolute brightness' of a star without considering how much that light has spread out. Before we look at this, let's first consider what the star has. Let's define some Luminosity, $L$, as a measure of its energy per unit time. Note that this energy is the sum over all wavelengths of the EM spectrum. This way, the value is independent of it's distance; its intrinsic to the star. To give some sense of scale, the Sun has $L=3.9$ $\times$ $10^{26}$ ms${}^{-1}$. We know that the intensity of a light source falls off as $\frac{1}{r^{2}}$ and due to spherical geometry we can write:
 \begin{equation}
 I = \frac{L}{4\pi r^{2}}
@@ -27,8 +28,21 @@ m - M = 5log(d) -5
 	\item Derive from (5) using (4) and (3).\par (Hint: Which of L, f corresponds to $I_a$ etc. in (3)?) 
 	\item What does it tell you about a star if it has a distance modulus of 0? What about -5? or +5? 
 \end{enumerate}
-
-
+\title{\large{Other Aspects}}
+We'll need a common measure of distance as well. You may have seen it before undergraduate physics or at L1. The Parsec is \textit{defined} as the distance at which one astronomical unit subtends an angle of one arcsecond. We'll break this down briefly to see what it corresponds to. You'll recognise that the average distance between the Earth and the Sun is 1 AU or ~1.5 $\times$ 10${}^{11}$ m. As the Earth orbits the Sun, there will be apparent parallax motion of the near star you are observing.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\draw[dashed] (0,0) circle [radius=2];
+\draw[dashed] (0,0) -- (10,0); 
+\draw (0,-2) -- (10,0);
+\draw (0,2) -- (10,0);
+\draw[fill, blue] (0,2) circle node[above] {Earth} [radius=0.5];
+\draw[fill, yellow] (10,0) circle node[right] {Star} [radius=0.5];
+\draw[fill, orange] (0,0) circle node[below] {Sun} [radius=0.5];
+\end{tikzpicture}
+\caption{Figure showing the derivation of 1 parsec}
+\end{figure}
 
 
 
