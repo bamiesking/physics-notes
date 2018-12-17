@@ -1,0 +1,45 @@
+\subsection{Basic Principles}
+To start, we'll look at what one first sees when looking at the night sky: Stars. We first need some way of measuring how bright a star is. The problem is they are not the same distance away. We cannot have the notion of the 'absolute brightness' of a star without considering how much that light has spread out. Before we look at this, let's first consider what the star has. Let's define some Luminosity, $L$, as a measure of its energy per unit time. Note that this energy is the sum over all wavelengths of the EM spectrum. This way, the value is independent of it's distance; its intrinsic to the star. To give some sense of scale, the Sun has $L=3.9$ $\times$ $10^{26}$ ms${}^{-1}$. We know that the intensity of a light source falls off as $\frac{1}{r^{2}}$ and due to spherical geometry we can write:
+\begin{equation}
+I = \frac{L}{4\pi r^{2}}
+\end{equation}
+To further add to this, our instruments cannot measure over the whole range of wavelengths. We have specific instruments for particular 'bands' of the spectrum. This is discussed in $3.1 The EM Spectrum$. A particular instrument may measure the 'V-band' of the spectrum. This means the intensity is measured \textit{at that wavelength}. For the 'V-band', this corresponds to 550 nm with a width of 90 nm. This is denoted
+\begin{equation}
+I_{V} = \frac{L_{V}}{4 \pi r^{2}}
+\end{equation}
+\par
+Astronomers use magnitudes to express intensities. Historically, because of the greeks but intuitively because we can imagine that stars will have a big range of intensities and may span quite a few powers of ten. Mathematically, we \textit{define} the (relative) apparent magnitude, $m$, to be
+\begin{equation}
+m_{a} - m{b} = -2.5log(\frac{I_{a}}{I_{b}})
+\end{equation}
+This is important! It is \textit{defined} this way such that if a source, $m_{a}$, has $I_{a} = 100I_{b}$ then it follows that $m_{a} - m_{b} = 5$. Make sure this makes sense, try it yourself. \par
+Bringing this definition back to before, we need a sense of the 'absolute magnitude' of a star. This is so we can compare them at equal footing. By convention we place the star at $D=10$ pc from the Sun. By using the flux, $f$, of a star at a distance d, we can give a measure of the Luminosity \textit{at} a distance D. 
+\begin{equation}
+\frac{L}{f} = (\frac{d}{10})^{2}
+\end{equation}
+The flux \textit{is} the luminosity at a given distance so the ratio of these gives a ratio of the distances sqaured. The difference between the absolute magnitude and apparent magnitude is called the distance modulus. 
+\begin{equation}
+m - M = 5log(d) -5
+\end{equation}
+\title{\large{Questions}}
+\begin{enumerate}
+	\item Equation (1.1) still works for intensities in a band i.e. $I_{a}$. Consider the apparent magnitudes of the \textit{same} star using different bands. We have $m_{B} - m{V} = -2.5log(\frac{I_{B}}{I_{V}})$. What does it mean when this value is close to $0^{-}$? What about close to $0^{+}$ or greater? [The V band is at 550 nm with a width of 90 nm and the B band is at 440 with a width of 100 nm] \par (Hint: This value is called the \textit{color} of a source!)
+	\item Derive from (5) using (4) and (3).\par (Hint: Which of L, f corresponds to $I_a$ etc. in (3)?) 
+	\item What does it tell you about a star if it has a distance modulus of 0? What about -5? or +5? 
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Telescopes}
+\subsection{The Atmosphere}
