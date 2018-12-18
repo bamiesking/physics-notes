@@ -1,11 +1,25 @@
 \subsection{Systems: Degrees of Freedom, Constraints and Coordinates}
 Any set of variables that can describe a \textit{configuration} of a system are dynamical variables. For cartesian coordinates, the dynamical variables are (x, y, z) and you may be familiar with spherical polar, $(r, \theta, \phi)$, and cylindrical polar, $(r, \theta, z)$. \par
-Consider a particle at (2, -1, 0) in cartesian. If the particle had a velocity, $v$, then the configuration of the system will change, say, to (2, -1, 3) after 1 s. It could change under the action of a force, \textbf{F} - the equation of motion of a system specifies the dynamical variables as time passes. You may have come across \textit{phase space} before which shows all possible states of the system. There is an important distinction here: Configuration space is the vector space defined by the coordinates used whereas phase space is the possible configurations of the system. \par
+Consider a particle at (2, -1, 0) in cartesian. If the particle had a velocity, $v$, then the configuration of the system will change, say, to (2, -1, 3) after 1 s. It could change under the action of a force, \textbf{F}, or have an inital speed. In general we have that the equation of motion of a system specifies the dynamical variables as time passes. You may have come across \textit{phase space} before which shows all possible states of the system. There is an important distinction here: Configuration space is the vector space defined by the coordinates used whereas phase space is the possible configurations of the system. \par
 
-Let's consider the particle described before. Assume that the particle has $\textbf{v} = 3\hat{k}$ m$s^{-1}$ . The configuration space is simply the 3D cartesian space. More formally, $\rm I\!R^{3}$. What would the phase space look like for the particle? We know the particle will only change its components of $\hat{k}$ as it is only travelling in that direction. Let's say that at $t=0$, the particle was at (2, -1, 0). Then it follows that it is a line in $\rm I\!R^{3}$ with $x=2$, $y=-1$ and $z>0$ with the direction of the line parallel to the $\hat{k}$ axis\par
+Let's consider the particle described before. Assume that the particle has $\textbf{v} = 3\hat{k}$ m$s^{-1}$ . The configuration space is simply the 3D cartesian space. More formally, $\rm I\!R^{3}$. What would the phase space look like for the particle? We know the particle will only change its components of $\hat{k}$ as it is only travelling in that direction. Let's say that at $t=0$, the particle was at (2, -1, 0). Then it follows that it is a line in $\rm I\!R^{3}$ with $x=2$, $y=-1$ and $z>0$ with the direction of the line parallel to the $\hat{k}$ axis.\par
 
-Why is configuration space useful? We can introduce the idea of constraints of a mechanical system to configuration space. An example of a constraint might be a ball confined to the surface of a table or a sphere. It's configuration space for the latter would only be the surface of the sphere. Formally, it is the subset of the original $\rm I\!R^{3}$ particle to the sphere $S^{2}$. If we consider cartesian coordinates, for the former we have $x=y=constant$ and the latter $x^{2} + y^{2} + z^{2} = d^{2}$ where d is the radius of the sphere. 
+Why is configuration space useful? We can introduce the idea of constraints of a mechanical system to configuration space. An example of a constraint might be a ball confined to the surface of a table or a sphere. The configuration space for the latter would only be the surface of the sphere. Formally, it is the subset of the original $\rm I\!R^{3}$ particle to the sphere $S^{2}$. If we consider cartesian coordinates, for the former we have $x=y=constant$ and the latter $x^{2} + y^{2} + z^{2} = d^{2}$ where d is the radius of the sphere. These types of constraints are called \textit{Scleronomic} constraints. They are expressed in the form
+\begin{equation}
+f(x , y, z, w,....) = 0 
+\end{equation}
+Notice they only depend on the coordinates of the system and more importantly, they have no time dependence. This distinguishes it from the other type of constraint, \textit{Rhenomic} constraints. These have a time dependence in their expression.
+\begin{equation}
+f(x, y, z, w,....., t) = 0   
+\end{equation}
+An example of this would be a ball spinning, or a bead rotating on a wire. There is another form that isn't used much in the course. \textit{Nonholonomic} constraints involve differential equations or inequalities in their expression. A velocity dependent force is on such example. \par
+What do constraints allow us to do? They're an algebraic expression so it comes naturally that they would be used to eliminate coordinates in the system. This leads on to the question of: \textit{How few coordinates do we need to entirely describe a system?}
 
+***
+
+\title{\large{Exercises}}
+\begin{enumerate}
+	\item 
 
 
 
