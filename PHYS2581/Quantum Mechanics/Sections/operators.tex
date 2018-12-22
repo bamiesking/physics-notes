@@ -1,4 +1,50 @@
-\subsection{Normalisation}
+
+All physical quantities in Quantum Mechanics can be represented by operators, which are essentially functions mapping from one space of physical states to another. From the $\hat{x} = x$ and $\hat{p} = -i\hbar\frac{\partial}{\partial x}$ operators along with time $t$, all other operatorss can be derived. For example, $\hat{E_k} = \frac{\hat{p}^2}{2m}$, as $E_k = \frac{p^2}{2m}$ classically. 
+
+In quantum mechanics, these operators are made to act on wavefunctions (see §\ref{sec:wave_functions}): complex functions that describe everything we know about a system. The measureable values of the quantity represented by the general operator $\hat{Q}$ are the eigenvalues $q$ in the following eigenvalue problem:
+
+\[ \hat{Q}\Psi = q\Psi \]
+
+where $\Psi$ is the wavefunction of the system being measured. 
+
+Classically, the Hamiltonian is usually the sum of kinetic and potential energies of a system. As such, we can define the Hamiltonian operator:
+
+\begin{align*} 
+\hat{H} &= \frac{\hat{p}^2}{2m} + V  \\
+&= -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V
+\end{align*}
+
+Using $\hat{H}{\Psi} = E\Psi$ (that the eigenvalues of the Hamiltonian are the allowed energy levels of the system), we obtain the Schr\"odinger equation. 
+
+
+\subsection{Expectation}
+
+The expectation of a general operator $\hat{Q}$ in 3D is given by:
+
+\[ \expval{\hat{Q}} = \int_{V} \Psi^*\hat{Q}\Psi dV \]
+
+The volume element $dV$ varies depending on the coordinate system. The volume element in some common 3D coordinate systems are given below. 
+
+\begin{table}[h!]
+\centering
+	\begin{tabular}{c|c|c}
+	Coordinate system & Position vector & Volume element \\ \hline
+	Cartesian & $x\hat{i} + y\hat{j} + z\hat{k}$ & $dxdydz$ \\
+	Spherical polar & $r\sin{\theta}\cos{\phi}\hat{i} + r\sin{\theta}\sin{\phi}\hat{j} + r\cos{\theta}\hat{k}$ & $r^2\sin{\theta}drd\theta d\phi$ \\
+	Cylindrical polar & $\rho\cos{\theta}\hat{i} + \rho\sin{\theta}\hat{j} + z\hat{k}$ & $\rho d\rho d\theta dz$
+	\end{tabular}
+	\caption{Volume element in common coordinate systems}
+\end{table}
 \subsection{Hermitian Operators}
+
+If an operator $Q$ is Hermitian, then $Q^* = Q$. All operators that represent a real, measurable quantity are Hermitian as if $q$ is a measurable quantity, then we require that $q = q^*$, i.e. $q$ is real. So
+
+\begin{align*}
+\hat{Q}^*\Psi = q^*\Psi = q\Psi = \hat{Q}\Psi
+\end{align*}
+
+So $\hat{Q}^* = \hat{Q}$. Hence we see that if $q$ is measurable (and thus real), $\hat{Q}$ is Hermitian.
+
+
 \subsection{Commutators}
 \subsection{Dirac Notation}
