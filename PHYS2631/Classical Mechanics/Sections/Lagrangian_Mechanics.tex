@@ -65,8 +65,15 @@ You will be learning a new forumlation of mechanics as oppose to Newton's by res
 \item \textbf{Constraining forces do no work.} In other words they're perpendicular to the motion. E.g. when a particle is moving across a table, the force restaining it is the reaction force (which is perpendicular to its direction of motion).
 \item \textbf{Forces are conservative.} This will be well defined in Mathematical methods, but it's saying the potential of the force exsists. The total work done is independent of its path.
 \end{enumerate}
-
-
+\par 
+In the beginning there was Newton's 2nd law, $\dot{p} = F_{i}$. For each force $F_{i}$ on the particle $i$, we take a \textit{virtual displacement} $\delta r_{i}$. 
+\begin{equation}
+\sum_{i} (F_{i} - \dot{p}) \cdot \delta r_{i} = 0
+\end{equation}
+The virtual displacement is some abitrary change of coordinates whilst time is held constant. It must respect the constraints of the system! Say we had a ball placed on a table in the $xy$ plane, we cannot have $z + \delta z$ because the ball is constrained to the table. The total force $F_{i}$ is the sum of the constraining force and the applied forces. Using our second assumption, we can rewrite (6) just in terms of the applied forces. This is known as D'Almbert's Principle.
+\begin{equation}
+\sum_{i} (F_{i}^{a} - \dot{p}) \cdot \delta r_{i} = 0
+\end{equation}
 
 
 
