@@ -49,20 +49,11 @@ This is a nice expression to check whether the coordinates of the system are 'ri
 \end{enumerate}
 
 
-
-
-
-
-
-
-
-
-
 \subsection{D'Alembert's Principle and The Langrangian}
 You will be learning a new forumlation of mechanics as oppose to Newton's by resolving forces. To do this we need to assume a few things. (The point at which they're used will be stated.)
 \begin{enumerate}
 \item \textbf{Holonomic constraints!} We don't want any constraints with differentials in them; that means no friction or viscous drag...
-\item \textbf{Constraining forces do no work.} In other words they're perpendicular to the motion. E.g. when a particle is moving across a table, the force restaining it is the reaction force (which is perpendicular to its direction of motion).
+\item \textbf{Constraining forces do no work.} In other words they're perpendicular to the motion. E.g. when a particle is moving across a table, the force restraining it is the reaction force (which is perpendicular to its direction of motion).
 \item \textbf{Forces are conservative.} This will be well defined in Mathematical methods, but it's saying the potential of the force exsists. The total work done is independent of its path.
 \end{enumerate}
 \par 
@@ -74,33 +65,57 @@ The virtual displacement is some abitrary change of coordinates whilst time is h
 \begin{equation}
 \sum_{i} (F_{i}^{a} - \dot{p}) \cdot \delta r_{i} = 0
 \end{equation}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+We want to replace $r_{i}$ with a generalised form of coordinates. We know that each force, $F_{i}$ is some function of the independent coordinates. (Specifically related to its potential by $-\nabla V(r_{i}, ... r_{n})$)
+After a \textit{long} derivation we arrive at the first milestone of Lagrangian mechanics. 
+\begin{equation}
+L = T - V
+\end{equation}
+Where T is the kinetic energy and V is the potential. L being the expression denoted the "Lagrangian". Be careful with signs of potential! Further note that we define the potential to be abitrary so that our expressions can differ by a constant term e.g. $3mg$. We will see briefly why this does not matter. But why is this useful? Using the $\textit{Euler-Lagrange Equation}$ we can find the equation of motion! 
+\begin{equation}
+\frac{d}{dt} (\frac{\partial L}{\partial \dot{q_{k}}}) - \frac{\partial L}{\partial q_{k}} = 0
+\end{equation}
+Let that sink in! This expression will yield the acceleration of $q_{k}$ only by considering the energies of the system! Rather then consider resultant force on a particle we can compactly find everything from this formula. \par 
+To round off, if we have a time derivative of a coordinate in the Lagrangian, L, but the coordinate does not appear itself, this is called an ignorable coordinate. But why is it ignorable? If we consider (8) we find that 
+\begin{equation}
+\frac{d}{dt} (\frac{\partial L}{\partial \dot{q_{k}}}) = 0 \implies \frac{\partial L}{\partial \dot{q_{k}}} = constant
+\end{equation}
+What is the constant (10) is refering to? A constant of the motion, like linear momentum. More generally, the \textit{canonically conjugate momentum} to the coordinate $q_{k}$. Having a constant of motion can help simplify problems.
+\par \vfill
+\title{\large{Exercises}}
+\begin{enumerate}
+	\item How does having an abitrary potential not affect the equation of motion? 
+	\item Why do we run into a problem with magnetic fields (with charged particles)? 
+\end{enumerate}
 
 \subsection{Euler's Formula and Variational Calculus}
+We introduced Euler's formula as the magical solve all for systems. In order to find out where it comes from we need to consider the even more magical and general form of this equation and understand where it comes from, The Calculus of Variations. We'll begin with a \textit{very} general statement as all things in mathematics do and break everything down.
+\title{What path y(x) leads to an extreme value of the functional}
+\begin{equation}
+I[y] = \int_{x1}^{x2} \! f(x, y, \frac{dy}{dx}) \textrm{d}x
+\end{equation}
+\title{where the trajectory goes through the point (x1, y1) and (x2, y2)?}
+\begin{figure}[h!]
+\begin{tikzpicture}
+\draw (1,1) node {$(x1, y1)$};
+\draw (2,4) node {$(x2, y2)$};
+\draw (0,0) -- (5,0) ;
+\draw (0,0) -- (0,5);
+\draw[domain=1:2,smooth,variable=\x] plot ({\x}, {\x * \x *0.5}) node {$y(x)$};
+\end{tikzpicture}
+\caption{What path minimises the distance between the two points?}
+\end{figure}
+\begin{enumerate}
+\item You should know what is meant by \textbf{path y(x)} and an extreme value. However, when we're looking at this method the word \textit{value} takes the physical meaning of whatever it is you are minimising (or maximising....). For example, distance. For completeness, the word extreme value is the mathematical sense of the word.
+\item The functional is the expression inside the integral of (11). Generally, it means a function of a function(s). 
+\item We want to 'solve' this problem set to some initial conditions which is why we have x1, x2 and so on. The word trajectory here is the path of the function through the xy plane. Note that we're not minimising the trajectory!
+\end{enumerate}
+To summarise, we're changing the path, y(x), \textit{in order to} minimise $I[y]$, our elusive function. How do we do this?
+\par
+\title{\large{\textbf{Derivation}}}
+As in most of calculus we'll consider a small change in the variable y so that our path changes and see what happens.
+\begin{math}
+\delta I = I[y +\delta y] - I[y] = \int \! F(y + \delta y, \frac{dy}{dx} + \delta \frac{dy}{dx}, x) \textrm{d}x -  f(x, y, \frac{dy}{dx}) textrm{d}x
+\end{math}
+
+
+
