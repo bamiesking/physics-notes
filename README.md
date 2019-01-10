@@ -35,3 +35,14 @@ Comment using '%' to show discussion within a file after the line it references
 ## Notation 
 
 Here we'll include the accepted use of notation for use in the equations of the document i.e. 'log' for the natural log.
+
+## Latex General
+
+[Symbol Cheat sheet](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
+
+~~50%~~ 99% of the time, the likely compiler fault will be a missing/extra `{` if dealing with math syntax.
+
+If graphics don't appear try using `\fbox{}` around the `\includegraphics{}`. This will make a border appear around the image to first clarify whether the image imported properly.
+Remember to check the correct file path. Adding the graphics extension isn't always neccessary as the package may deal with that. Use `scale` to change size to fit page.
+
+As a general rule to keep the `physics_notes.cls` lightweight and save your time, try asking *What _can_ I do* rather than *what I _want_ to do*.
