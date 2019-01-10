@@ -1,3 +1,71 @@
 \subsection{Fourier Series} %% Above section (?)
-\subsection{The Dirac $\delta$-Function}
+
+
+
+
+\subsection{The Dirac Distribution}
+The Dirac $\delta$-function is not a function. It is considered a generalised function or distribution. There are lots of ways to think about what it is mathematically and in the context of what we'll be using it for, integrals.
+It is the limit of a rectangle shaped graph (or gaussian..) where the height tends to infinity and the width tends to zero centered at the origin. However, it has the property that
+%%%Figure of the distribution! 
+\begin{equation}
+\int_{-\infty}^{+\infty} \! \delta(x) \textrm{d}x = 1 
+\end{equation}
+This is its most defining property and can be seen clearly in all of its properties.
+\begin{itemize}
+\item \begin{math}\delta(x - a) = 0 \forall x \neq 0\end{math} As defined above, our function is zero everywhere execpt at the origin.
+\item \begin{math} \int_{-\infty}^{+\infty} \! \delta(x-a)f(x) \textrm{d}x = f(a) \end{math} Hopefully makes sense. The resulting function from the product is simply the value of the function where $\delta(x)$ is one. Note that $a$ would have to be in the integral limits. 
+\end{itemize}
+One way of defining it is by a sequence given by
+\begin{equation}
+\delta_{n}(t-x) = \frac{\sin(n[t-x])}{\pi(t-x)} = \int_{-n}^{n} \! \frac{exp(-i\omega(t-x))}{2\pi} \textrm{d}\omega 
+\end{equation}
+This is slightly convoluted but is a useful formulation when using transforms which we will find out later on. By taking the limit of above as $n \to \infty$, we arrive at 
+\begin{equation}
+\delta(t-x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \! exp(-i\omega(t-x)) \textrm{d}\omega
+\end{equation}
+Some further properties to note 
+\begin{itemize}
+\item \begin{math}\delta(x) = \delta(-x) \end{math} It is even!
+\item  \begin{math} \delta(g(x)) =\sum_{a_{i}} \frac{\delta(x-a_{i})}{\abs{g'(a_{i})}}\end{math} where $a_{i}$ is each (distinct) root of the function g(x) (and $g'(a_{i})\neq0$).
+\end{itemize}
+A close relative of this is the Heaviside step function. It is 0 for all negative numbers and 1 for all postive numbers. It is usually defined as 0.5 at 0 ('half maximum convention') and/or have a discontinuity at 0. Once can notice that the Heaviside step function is the cumulative distribution function of the Dirac $\delta$-function. It is then written that
+\begin{equation}
+H(x) = \int_{-\infty}^{+\infty} \! \delta(x)f(x) \textrm{d}x \implies H'(x) = \delta(x)
+\end{equation}\par 
+\title{\large{Exercises}}
+\begin{enumerate}
+\item What is \begin{math} \int_{-9}^{0} \! \delta(x-1) \textrm{d}x \end{math} ?
+\item What about \begin{math} \int_{-9}^{2} \! \delta(x-1)  \textrm{d}x \end{math} ?
+\item And finally  \begin{math} \int_{-9}^{2} \! \delta(x-1)\delta(x+3) \textrm{d}x \end{math} ?
+\end{enumerate}
+\begin{figure}
+\centering
+\includegraphics[scale=0.2]{"Figures/Hside"}
+\captionsetup{justification=centering}
+\caption{Recommeded break reading: \url{https://physicstoday.scitation.org/doi/10.1063/PT.3.1788} `\textit{Mathematics is an experimental science and definitions do not come first, but later on. [..] Shall I refuse my dinner because I do not fully understand the process of digestion?}' - O. Heaviside. The department's approach to the course. } %%%READ: image may not appear on built in pdf viewer. When printed, images appear%%%
+\label{fig:Hside}
+\end{figure}
+\newpage
 \subsection{The Fourier and Laplace Transform}
+An integral transfrom is defined by the equation: 
+\begin{equation}
+\int_{-\infty}^{+\infty} \! k(x, y) f(x) \textrm{d}x = I[f(x)](y)
+\end{equation}
+Let's have a look at what is going on. We have an 'input' function f(x) that is put in this transform and what we get is a function dependent on the variable y. The k(x, y) is said to be the \textit{kernel} of the transform analgous to the kernel in linear algebra. It is a linear operator. This is true since integration is a linear operator. [Quick reminder: \begin{math} I[af(x) + bg(x)] = aI[f(x)] + bI[g(x)]\end{math}]
+If I is given, we can introduce the inverse operator of $I$, $I^{-1}$ [\begin{math} I[f]=g and I^{-1}[g] = f\end{math}] 
+The two looked at in this course are the \textit{Laplace Transform} and the \textit{Fourier Transform}
+Here is the Fourier Transform
+\begin{equation}
+\mathcal{F}[f(t)](\omega) = \hat{\mathcal{f}(w)} = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} \! f(t) exp(-i\omega t) \textrm{d}t
+\end{equation}
+Before explaining (if ever) where this comes from ~\ref{fig:Hside}, let's take a look at a few of its properties.
+The integral exists if
+\begin{itemize}
+\item f has a finite number of discontinuities
+\item \begin{math} \int_{-\infty}^{+\infty} \! \abs{f(t)} \textrm{d}t is finite/\end{math}
+\item If f is continous we can define the inverse Fourier transform as follows;
+\begin{math} \mathcal{F}^{-1}[\hat{f(\omega)}](t) = f(t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty}\hat{f}(\omega)exp(i\omega t) \textrm{d}\omega
+\end{math}
+\end{itemize}
+As a brief aside, the convention for the fourier transform can vary with some conventions have $\omega$ as $2\pi \mu v$ or having no 2$\pi$.\par
+So why do we use this transform? A lot of functions are not periodic and whilst it would be easy to use the fourier series to decompose a function sometimes we cannot do that. We can imagine that the function defined has an infinite period or interval. Do you remember the complex (general) definition of the Fourier series?
