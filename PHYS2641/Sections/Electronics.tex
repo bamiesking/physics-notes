@@ -1,2 +1,49 @@
 \subsection{Components}
+As an introduction, you should all be familar and confident with \textbf{circuit diagrams}, \textbf{PCBs}, \textbf{Resistor Networks} etc. You would have done \textit{some} form of electronics at your A-level or equivalent. We will be going over a few familar topics just to be on the safe side.
+\par
+A \textbf{potential divider} circuit is one which produces an output voltage $V_{out}$ which is a fraction of the input voltage $V_{in}$ dependent on the resistors used in the network. It is best described by a diagram:
+%%%as you can imagine this would take a long time....
+\par
+\begin{equation}
+V_{out} = \frac{R_{2}}{R_{1} + R_{2}}V_{in}
+\end{equation}
+We use `out' and `in' to describe the voltage as our `in' voltage is the source whereas our `out' voltage may go off to another circuit or is the desired voltage that we have control over. However, this is not complete! It's not very realistic to have some $V_{out}$ going to some ideal circuit. \textbf{Loading} the output would change the output voltage. We can simplify this result by replacing our idealised $R_{2}$ with an equivalent resistance, $R_{eq}$, caused by the load, $R_{L}$.
+\begin{equation}
+\frac{1}{R_{eq}} = \frac{1}{R_{2}} + \frac{1}{R_{L}} \implies V_{out} = \frac{R_{eq}}{R_{1} + R_{eq}}V_{in}
+\end{equation}
+You should be familiar with the capacitor and all its characteristics; \begin{math} Q=CV \quad \textrm{and} \quad I = C\frac{\partial V}{\partial t}\end{math}. The resistance of a capacitor is known as \textbf{capacitive reactance} given by
+\begin{equation}
+X_{C} = \frac{1}{i\omega C}
+\end{equation}
+Yes, $i$ being the imaginary unit and $\omega = 2\pi f$. Reactance can be a property given to resistors($X_{R}$), capacitors($X_{C}$) and inductors($X_{L}$) with them being $R$, $\frac{1}{i\omega C}$ and $i\omega L$ respectively. In this course, reactance and impedance are the same thing, with the latter denoted Z. \textit{However}, engineers sometimes leave the imginary unit until the end i.e. the impedance and do not include it in the reactance. To avoid confusion, we will use impedance for the rest of this text. %%What \textit{is} impedance?
+You can imagine that the addition of a capacitor or inductor to a potential dividor would cause the voltage to now be complex!\par
+In general, the behavior of a circuit is described by its transfer function, $H(\omega)$. In the case of (1) it would be $\frac{R_{1}}{R_{1} + R_{2}}$. You can imagine though that it may change depending on if there were capacitors with their own impedance, $Z_{C}$, etc. So to make it more general we define it by the ratio of voltages. More specifically, the transfer function can describe the \textit{Gain} and \textit{Phase shift} of the system. We \textit{are} talking about AC after all.  Let's look at a case where the $R_{2}$ resistor is replaced by a capacitor of impedance $Z_{C}$. One can show that 
+\begin{equation} \label{eq:RC}
+\begin{gathered}
+\abs{H(\omega)} = \frac{1}{\sqrt{1+\omega^{2}C^{2}R^{2}}}\quad \textrm{and}\quad  \\ arg[H(\omega)] = arctan(-\omega CR)
+\end{gathered}
+\end{equation}
+What does this circuit do and what does ~\ref{eq:RC} show? $\abs{H(\omega)}$ increases as frequency decreases. Our ratio of voltages $\frac{V_{out}}{V_{in}}$ would hence increase \textit{so} for low-frequency voltages the output voltage is high i.e. transfered! Moreover, high-frequency voltage signals are not transfered. This is a \textbf{Low-pass filter}; allows low frequency voltages to pass. \par We can plot the transfer function as a \textbf{Bode plot}.It is a log-log plot where the $y$-axis displays the dB of the gain and the $x$-axis being the frequency. As dB use power as their units and $ P \propto V^{2}$ we have
+\begin{equation}
+\begin{gathered}
+\textrm{Gain}_{dB} = 10l\textrm{log}_{10}\Bigg(\frac{\abs{V_{out}}^{2}}{\abs{V_{in}}^{2}}\Bigg) = 20\textrm{log}_{10}(\abs{H(\omega)})
+\end{gathered}
+\end{equation}
+This is called the `20-log-rule'. For some nomenclature, the range of frequencies which is not filtered by the pass filter is called the \textbf{passband} and the one filtered out is called the \textbf{stopband}. Note that this isn't a sudden process, there will be a transition defined by the \textbf{corner frequency}. This is defined as the point where the gain drops by 3 dB. The stopband has a textbf{roll-off}, the number of dB the circuit drops per frequency or magnitude of frequency. i.e. -15dB/dec (decade).
+\par
+\title{\large{Exercises}}
+\begin{itemize}
+\item What happens for the scenario in ~\ref{eq:RC} when we swap the capacitor and resistor and end up with \begin{math}\abs{H(\omega)} = \frac{\omega CR}{\sqrt{1 + \omega^{2}C^{2}R^{2}}}\end{math}? 
+\item The \textit{corner} freqeuncy, $f_c$ is the frequency at the characteristic `-3db'.  What is this frequency explicity in terms of R and C? [At cutoff we have \begin{math} \abs{H(\omega)} = \frac{1}{\sqrt{2}} \end{math}
+
+\subsection{Control theory}
+Pretty self explanatory, we look at how we can design systems so that we want a desired output given some input. 
+\begin{itemize}
+\item \textbf{Open-loop} control systems is where the output isn't monitored. The output is simply an output given by a particular input that could be calibrated or varied depending on a dial or digit input etc. These aren't too interesting so we'll be studying the latter.
+\item \textbf{Closed-loop} control. The output is monitored and the system changes the output dependent on what is the desired output. There is a notion of stability around the desired level. Generally, it'd be a sensor giving a measured ouput.
+
+
+
+
+
 \subsection{Systems}
