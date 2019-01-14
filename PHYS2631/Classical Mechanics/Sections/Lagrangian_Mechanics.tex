@@ -100,7 +100,7 @@ I[y] = \int_{x1}^{x2} \! f(x, y, \frac{dy}{dx}) \textrm{d}x
 \draw (2,4) node {$(x2, y2)$};
 \draw (0,0) -- (5,0) ;
 \draw (0,0) -- (0,5);
-\draw[domain=1:2,smooth,variable=\x] plot ({\x}, {\x * \x *0.5}) node {$y(x)$};
+\draw[domain=1:2,smooth,variable=\x] plot ({\x}, {\x * \x }) node {$y(x)$};
 \end{tikzpicture}
 \caption{What path minimises the distance between the two points?}
 \end{figure}
