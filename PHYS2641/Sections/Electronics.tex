@@ -41,9 +41,29 @@ Pretty self explanatory, we look at how we can design systems so that we want a 
 \begin{itemize}
 \item \textbf{Open-loop} control systems is where the output isn't monitored. The output is simply an output given by a particular input that could be calibrated or varied depending on a dial or digit input etc. These aren't too interesting so we'll be studying the latter.
 \item \textbf{Closed-loop} control. The output is monitored and the system changes the output dependent on what is the desired output. There is a notion of stability around the desired level. Generally, it'd be a sensor giving a measured ouput.
-
-
-
+\end{itemize}
+For a closed-loop control system we have
+\begin{equation}
+\begin{gathered}
+V_{err} = (V_{in} - V_{fb}) = (V_{in} - \Beta V_{out}) \quad \textrm{where} \quad V_{out} = AV_{err} \\ 
+\frac{V_{out}}{V_{in}}=\frac{A}{1 +A\Beta}
+\end{gathered}
+\end{equation}
+We have an input,$V_{in}$ modified by the feedback signal, $V_{fb}$. This signal is then modified by `A' towards the output. Out feedback signal, $V_{fb}$ comes from the output modified by `\Beta', $\Beta V_{out}$. Hence we find the ratio of of voltages. This method combined with 'PID' is used in the \textit{Op-amp} PCB.
+\par
+This chip has two inputs, the non-inverting($V_{+}$) and the inverting($V_{-}$). The output voltage of an operational amplifier is \begin{math} A(V_{+} -V_{-})\end{math}
+The Op-amp usually has very high gain so we use negative feedback to control it. IF we combine this with our closed-loop control \textbf{when} A is very large such that $A\Beta >> 1$ then
+\begin{equation}
+\frac{V_{out}}{V_{in}} \approx \frac{A}{A\Beta} = \frac{1}{\Beta} 
+\end{equation}
+So out amplifier is only dependent on our feedback modification.\par
+We now know how to use our Op-amp to control an input and ouput voltage. What is this mysterious $\Beta$ and how can we control it so that our output voltage can change? We can use a potential divider integrated into this circuit.
+The output of the Op-amp could be fed as input for the potential divider. Then the output of the potential divider could be fed as `feedback' for the op-amp.
+Some general properties
+\begin{itemize}
+\item Ideal Op-amps have infinite gain.
+\item Real Op-amps have limited gain which drops off with increasing frequency.
+\end{itemize}
 
 
 \subsection{Systems}
