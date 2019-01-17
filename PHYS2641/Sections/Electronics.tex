@@ -29,12 +29,13 @@ What does this circuit do and what does ~\ref{eq:RC} show? $\abs{H(\omega)}$ inc
 \textrm{Gain}_{dB} = 10l\textrm{log}_{10}\Bigg(\frac{\abs{V_{out}}^{2}}{\abs{V_{in}}^{2}}\Bigg) = 20\textrm{log}_{10}(\abs{H(\omega)})
 \end{gathered}
 \end{equation}
-This is called the `20-log-rule'. For some nomenclature, the range of frequencies which is not filtered by the pass filter is called the \textbf{passband} and the one filtered out is called the \textbf{stopband}. Note that this isn't a sudden process, there will be a transition defined by the \textbf{corner frequency}. This is defined as the point where the gain drops by 3 dB. The stopband has a textbf{roll-off}, the number of dB the circuit drops per frequency or magnitude of frequency. i.e. -15dB/dec (decade).
+This is called the `20-log-rule'. For some nomenclature, the range of frequencies which is not filtered by the pass filter is called the \textbf{passband} and the one filtered out is called the \textbf{stopband}. Note that this isn't a sudden process, there will be a transition defined by the \textbf{corner frequency}. This is defined as the point where the gain drops by 3 dB. The stopband has a \textbf{roll-off}, the number of dB the circuit drops per frequency or magnitude of frequency. i.e. -15dB/dec (decade).
 \par
 \title{\large{Exercises}}
 \begin{itemize}
 \item What happens for the scenario in ~\ref{eq:RC} when we swap the capacitor and resistor and end up with \begin{math}\abs{H(\omega)} = \frac{\omega CR}{\sqrt{1 + \omega^{2}C^{2}R^{2}}}\end{math}? 
-\item The \textit{corner} freqeuncy, $f_c$ is the frequency at the characteristic `-3db'.  What is this frequency explicity in terms of R and C? [At cutoff we have \begin{math} \abs{H(\omega)} = \frac{1}{\sqrt{2}} \end{math}
+\item The \textit{corner} freqeuncy, $f_c$ is the frequency at the characteristic `-3db'.  What is this frequency explicity in terms of R and C? [At cutoff we have \begin{math} \abs{H(\omega)} = \frac{1}{\sqrt{2}} \end{math}]
+\end{itemize}
 
 \subsection{Control theory}
 Pretty self explanatory, we look at how we can design systems so that we want a desired output given some input. 
@@ -45,19 +46,19 @@ Pretty self explanatory, we look at how we can design systems so that we want a 
 For a closed-loop control system we have
 \begin{equation}
 \begin{gathered}
-V_{err} = (V_{in} - V_{fb}) = (V_{in} - \Beta V_{out}) \quad \textrm{where} \quad V_{out} = AV_{err} \\ 
-\frac{V_{out}}{V_{in}}=\frac{A}{1 +A\Beta}
+V_{err} = (V_{in} - V_{fb}) = (V_{in} - \beta V_{out}) \quad \textrm{where} \quad V_{out} = AV_{err} \\ 
+\frac{V_{out}}{V_{in}}=\frac{A}{1 +A\beta}
 \end{gathered}
 \end{equation}
-We have an input,$V_{in}$ modified by the feedback signal, $V_{fb}$. This signal is then modified by `A' towards the output. Out feedback signal, $V_{fb}$ comes from the output modified by `\Beta', $\Beta V_{out}$. Hence we find the ratio of of voltages. This method combined with 'PID' is used in the \textit{Op-amp} PCB.
+We have an input,$V_{in}$ modified by the feedback signal, $V_{fb}$. This signal is then modified by `A' towards the output. Out feedback signal, $V_{fb}$ comes from the output modified by `$\beta$', $\beta V_{out}$. Hence we find the ratio of of voltages. This method combined with 'PID' is used in the \textit{Op-amp} PCB.
 \par
 This chip has two inputs, the non-inverting($V_{+}$) and the inverting($V_{-}$). The output voltage of an operational amplifier is \begin{math} A(V_{+} -V_{-})\end{math}
-The Op-amp usually has very high gain so we use negative feedback to control it. IF we combine this with our closed-loop control \textbf{when} A is very large such that $A\Beta >> 1$ then
+The Op-amp usually has very high gain so we use negative feedback to control it. IF we combine this with our closed-loop control \textbf{when} A is very large such that $A\beta >> 1$ then
 \begin{equation}
-\frac{V_{out}}{V_{in}} \approx \frac{A}{A\Beta} = \frac{1}{\Beta} 
+\frac{V_{out}}{V_{in}} \approx \frac{A}{A\beta} = \frac{1}{\beta} 
 \end{equation}
 So out amplifier is only dependent on our feedback modification.\par
-We now know how to use our Op-amp to control an input and ouput voltage. What is this mysterious $\Beta$ and how can we control it so that our output voltage can change? We can use a potential divider integrated into this circuit.
+We now know how to use our Op-amp to control an input and ouput voltage. What is this mysterious $\beta$ and how can we control it so that our output voltage can change? We can use a potential divider integrated into this circuit.
 The output of the Op-amp could be fed as input for the potential divider. Then the output of the potential divider could be fed as `feedback' for the op-amp.
 Some general properties
 \begin{itemize}
