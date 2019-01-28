@@ -1,2 +1,45 @@
 \subsection{Simple Harmonic Oscillator}
+In most of our systems we have assumed that all of generalised forces are conservative. (Recall the assumptions we make for the Lagrangian!) In the context of our Lagrangian it modifies such that our euler equation is now
+\begin{equation}
+ \frac{d}{dt} (\frac{\partial L}{\partial \dot{q_{k}}}) - \frac{\partial L}{\partial q_{k}} = F_{d}
+\end{equation}
+where $F_{d}$ is some damping force. We'll come back to this later! \par In our familiar diffy q notation we have some factor that is proportional to the velocity of the oscillator and modifies the resultant motion. 
+\begin{equation}
+\ddot{q} + \frac{\omega}{Q}\dot{q} + \omega^{2}q = 0
+\end{equation}
+You should be able to solve this! Skipping the details, we end up with some trial function that determines our constant, $\lambda$. 
+\begin{equation}
+\lambda = -\frac{\omega}{2Q} \pm \sqrt{1-4Q^{2}}
+\end{equation}
+So our equation of motion depends on how damped our system is! As with most mathematics in physics, it is \textit{very} important to tie it to some physical meaning. Hence we'll be going over the different bands that $Q$ can fall under and see its behaviour.
+\begin{itemize}
+\item \textbf{Overdamped} - where $Q < \frac{1}{2}$. Think about our $\lambda$, this means that our \textit{discriminant} is a positive number and hence we get no sinusoidal functions in our equation of motion. You can see why it's called \textit{overdamped}.... \begin{tiny}(it doesn't oscillate) 
+\end{tiny}
+\begin{equation}
+\implies q(t) = e^{-\frac{\omega t}{2Q}}\Big(A\textrm{cosh}(\omega't) + B\textrm{sinh}(\omega't\Big)
+\end{equation}
+These equations aren't too important as you should be able to derive them with ease. This one in particular is just a very general case of exponentials. 
+\item \textbf{Critically Damped} - where $Q = \frac{1}{2}$. Again, think about our $\lambda$. This would give repeated roots as our discriminant is equal to zero. The form of this equation of motion would be 
+\begin{equation}
+q(t) = e^{-\frac{\omega t}{2Q}}\Big(A+Bt\Big)
+\end{equation}
+This corresponds to a (the) fast(est) return to equilibirum \textit{without overshooting}. [`Overshooting' isn't really a thing, its simply as case of our next equation of motion.] 
+\item \textbf{Lightly Damped} where $Q < \frac{1}{2}$. This is probably the most interesting and characteristic of the different `quality' oscillators. This gives sinusoidal functions \textit{with} a decaying exponential term.
+\begin{equation}
+q(t) = e^{-\frac{\omega t}{2Q}}\Big(A\textrm{sin}(\omega' t) + B\textrm{cos}(\omega 't)\Big)
+\end{equation}
+\end{itemize}
+
 \subsection{Driving Force and Green's Functions}
+
+
+
+
+\title{Exercises}
+\begin{enumerate}
+\item When we talked about our regular linear oscillators we had terms like $\omega'$ and abitrary constants like $A$ and $B$. What do these represent? As an exercise, write the \textit{most} general case of our equations of motion in terms of initial conditions. What \textit{are} $A$, $B$ and $\omega'$?  [For example, at $t=0$ we could have q(0) to replace $A$or $B$. That is the value of the position at $t=0$.]
+\end{enumerate}
+
+
+
+
