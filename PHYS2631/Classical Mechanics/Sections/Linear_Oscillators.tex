@@ -7,7 +7,11 @@ where $F_{d}$ is some damping force. We'll come back to this later! \par In our 
 \begin{equation}
 \ddot{q} + \frac{\omega}{Q}\dot{q} + \omega^{2}q = 0
 \end{equation}
-You should be able to solve this! Skipping the details, we end up with some trial function that determines our constant, $\lambda$. 
+You should be able to solve this! Skipping the details, we end up with some trial function that determines our constant, $\lambda$. As an aside to tie this physics in practice, there are many different ways to mathematically describe the amount of damping. For the notes and most likely the course by the department will use $Q$, the quality factor. Other textbooks or engineers may use $\Xi$, the so called \textit{damping factor} such that
+\begin{math}
+\Xi = \frac{1}{2Q}
+\end{math}.
+
 \begin{equation}
 \lambda = -\frac{\omega}{2Q} \pm \sqrt{1-4Q^{2}}
 \end{equation}
@@ -29,15 +33,20 @@ This corresponds to a (the) fast(est) return to equilibirum \textit{without over
 q(t) = e^{-\frac{\omega t}{2Q}}\Big(A\textrm{sin}(\omega' t) + B\textrm{cos}(\omega 't)\Big)
 \end{equation}
 \end{itemize}
-
-\subsection{Driving Force and Green's Functions}
-
+This is what we'd probably expect from an intital consideration of a damping force on an oscillating system. We have a system that is losing energy due to friction and hence has decaying amplitude. You could also tie this to the other systems. Where the friction is so high that the system doesn't even oscillate but slowly return to some stable equilibirum. \par This is great \tectrm{but} we've moved in the other direction. We want to solve these systems using the Lagrangian, not by resolving forces. This leads us onto our next topic.
+ \subsection{Driving Force and Green's Functions}
+As briefly mentioned above we have a corresponding lagrangian for an oscillator under a damping force. We'll now look at a driven oscillator to give a fresh new idea then repeating the earlier section. We have (make sure you understand!)
+\begin{equation}
+L = \frac{m\dot{q}^{2}}{2} - \frac{m\omega^{2}q^{2}}{2} - F(t)q
+\end{equation}
+Where $F(t)$ is our driving force. We should note here that our driving force doesn't really interact with our oscillator. The ghost which exerts the force has no force exerted on it by the oscillator.
 
 
 
 \title{Exercises}
 \begin{enumerate}
 \item When we talked about our regular linear oscillators we had terms like $\omega'$ and abitrary constants like $A$ and $B$. What do these represent? As an exercise, write the \textit{most} general case of our equations of motion in terms of initial conditions. What \textit{are} $A$, $B$ and $\omega'$?  [For example, at $t=0$ we could have q(0) to replace $A$or $B$. That is the value of the position at $t=0$.]
+\item It can be fun to think about real life examples of each linear oscillator. Give a real life example for the lightly damped and for $Q \geq \frac {1}{2}$. Perhaps think about the difference, physically, between critically damped and overdamped.  In which case does it minimise the time taken to return to equilibirum? 
 \end{enumerate}
 
 
