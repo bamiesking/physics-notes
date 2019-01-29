@@ -28,7 +28,7 @@ This is just to formalise everything in a neat expression. Since we have a gener
 \begin{equation}
  \frac{\dot{r_{i}}}{\dot{q_{i}}} =  \frac{r_{i}}{q_{i}} 
 \end{equation}
-This is a nice expression to check whether the coordinates of the system are 'right'.
+This is a nice expression to check whether the coordinates of the system are `right'.
 \par
 
 
@@ -91,31 +91,34 @@ What is the constant (10) is refering to? A constant of the motion, like linear 
 We introduced Euler's formula as the magical solve all for systems. In order to find out where it comes from we need to consider the even more magical and general form of this equation and understand where it comes from, The Calculus of Variations. We'll begin with a \textit{very} general statement as all things in mathematics do and break everything down.
 \title{What path y(x) leads to an extreme value of the functional}
 \begin{equation}
-I[y] = \int_{x1}^{x2} \! f(x, y, \frac{dy}{dx}) \textrm{d}x
+I[y] = \int_{x_{1}}^{x_{2}} \! f(x, y, \frac{dy}{dx}) \textrm{d}x
 \end{equation}
-\title{where the trajectory goes through the point (x1, y1) and (x2, y2)?}
+
 \begin{figure}[h!]
+\title{where the trajectory goes through the point $(x_{1}, y_{1})$ and $(x_{2}, y_{2})$?}
+\centering
 \begin{tikzpicture}
-\draw (1,1) node {$(x1, y1)$};
-\draw (2,4) node {$(x2, y2)$};
-\draw (0,0) -- (5,0) ;
-\draw (0,0) -- (0,5);
-\draw[domain=1:2,smooth,variable=\x] plot ({\x}, {\x * \x }) node {$y(x)$};
+\draw (0.8,1) node {$(x_{1}, y_{1})$};
+\draw (2.1,4) node {$(x_{2}, y_{2})$};
+\draw[domain=1.05:1.9,smooth,variable=\x] plot ({\x}, {\x * \x  });
 \end{tikzpicture}
 \caption{What path minimises the distance between the two points?}
 \end{figure}
 \begin{enumerate}
-\item You should know what is meant by \textbf{path y(x)} and an extreme value. However, when we're looking at this method the word \textit{value} takes the physical meaning of whatever it is you are minimising (or maximising....). For example, distance. For completeness, the word extreme value is the mathematical sense of the word.
+\item You should know what is meant by \textbf{path y(x)} and an extreme value. However, when we're looking at this method the word \textit{value} takes the physical meaning of whatever it is you are minimising (or maximising....). For example, distance. The word extreme is the mathematical sense of the word.
 \item The functional is the expression inside the integral of (11). Generally, it means a function of a function(s). 
-\item We want to 'solve' this problem set to some initial conditions which is why we have x1, x2 and so on. The word trajectory here is the path of the function through the xy plane. Note that we're not minimising the trajectory!
+\item We want to `solve' this problem set to some initial conditions which is why we have $x_{1}, x_{2}$ and so on. The word trajectory here is the path of the function through the xy plane. Note that we're not minimising the trajectory!
 \end{enumerate}
 To summarise, we're changing the path, y(x), \textit{in order to} minimise $I[y]$, our elusive function. How do we do this?
 \par
 \title{\large{\textbf{Derivation}}}
-As in most of calculus we'll consider a small change in the variable y so that our path changes and see what happens.
-\begin{math}
-\delta I = I[y +\delta y] - I[y] = \int \! F(y + \delta y, \frac{dy}{dx} + \delta \frac{dy}{dx}, x) \textrm{d}x -  f(x, y, \frac{dy}{dx}) textrm{d}x
-\end{math}
+As in most of calculus we'll consider a small change in the variable y so that our path changes and see what happens. \medskip
+\begin{equation}
+\begin{gathered}
+\delta I = I[y +\delta y] - I[y] = \\ 
+\int \! F(y + \delta y, \frac{dy}{dx} + \delta \frac{dy}{dx}, x) \textrm{d}x -  f(x, y, \frac{dy}{dx}) \textrm{d}x
+\end{gathered}
+\end{equation}
 ....
 The point is that this leads to our holy grail equation.
 
