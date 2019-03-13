@@ -15,3 +15,6 @@
 \RequirePackage{gensymb}
 \RequirePackage{hyperref}
 \RequirePackage{tikz}
+
+% Change style of vector command
+\renewcommand{\vec}[1]{\mathbf{#1}}
