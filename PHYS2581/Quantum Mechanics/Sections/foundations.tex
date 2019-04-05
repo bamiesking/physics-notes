@@ -1,6 +1,6 @@
 \subsection{The Quantum Wavefunction}
 
-A consequence of waave-particle duality is that what would classically be considered as discrete particles, such as electrons, can be described via a wavefunction (analagous to a classical wave equation). In order for an arbitrary wavefunction $\Psi(\vec{r}, t)$ to be valid, it has to obey the Schr\"odinger equation (given here in its 3D time-dependent form):
+A consequence of wave-particle duality is that what would classically be considered as discrete particles, such as electrons, can be described via a wavefunction (analagous to a classical wave equation). In order for an arbitrary wavefunction $\Psi(\vec{r}, t)$ to be valid, it has to obey the Schr\"odinger equation (given here in its 3D time-dependent form):
 
 \[ \hat{H}\Psi = i\hbar\frac{\partial\Psi}{\partial t} \]
 
@@ -10,7 +10,7 @@ where $\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 + V(\vec{r}, t)$ is the Hamiltonian
 
 where $E$ is the total energy of the system, and the Hamiltonian in 1D is $\hat{H} = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)$.
 
-\subsubsection*{Probability distributions and normalisation}
+\subsubsection{Probability distributions and normalisation}
 
 A further requirement for a wavefuntion to be valid in real space is for the total probability of finding the particle at some position in space is equal to 1. The probability of finding a particle described by the complex unnormalised wavefunction $f(x,t)$ between $x$ and $x+dx$ is:
 
@@ -22,7 +22,7 @@ where the constant of proportionality is the normalisation constant $N$, given b
 
 So $\Psi(x,t) = Nf(x,t)$ and $\int_{-\infty}^{+\infty} P(x,t)dx = \int_{-\infty}^{+\infty} \Psi^*(x,t)\Psi(x,t)dx = 1$.
 
-\subsubsection*{Dirac notation}
+\subsubsection{Dirac notation}
 
 In Dirac notation, devised by Paul Dirac, bra and ket vectors are used to represent wave functions and their complex conjugates:
 
@@ -74,7 +74,7 @@ Including the time-dependence of each state leads us to find that superpositions
 
 Classically, objects can have two forms of angular momentum: orbital, and rotational. We can reformulate orbital angular momentum using operators without straying too far from the classical interpretation, however rotational angular momentum is only present in Quantum Mechanics as an analogy. The nature of electrons as pointlike particles means that any notion of them rotating is meaningless, nevertheless experiment has shown that fundamental particles posess an intrinsic, quantised angular momentum which we call `spin'. Once we have looked at both forms, we can generalise the concept of angular momentum.
 
-\subsubsection*{Orbital angular momentum}
+\subsubsection{Orbital angular momentum}
 
 Orbital angular momentum is key for describing central potentials in 3D (e.g. the Hydrogen atom). Classically, orbital angular momentum, $\vec{L}$, is given by:
 
@@ -114,7 +114,7 @@ P(\theta)d\theta = \int_{\phi=0}^{\phi=2\pi} P(\theta, \phi) d\Omega &= \int_{\p
 
 where $P(\theta, \phi) d\Omega$ is the probability of finding the particle in some solid angle $d\Omega = \sin{\theta} d\theta d\phi$ around $(\theta, \phi)$.
 
-\subsubsection*{Spin}
+\subsubsection{Spin}
 
 The Stern-Gerlach experiment provided evidence for intrinsic angular momentum of electrons, and showed that this `spin' can take two values (see course notes, §13.1 for more). As with all quantites in Quantum Mechanics, we can represent spin with an operator $\hat{S_z}$, which has the following eigenstates in the case of an electron:
 
@@ -145,15 +145,114 @@ where $g_s$ is the spin g-factor. Hence the $z$-component of spin magnetic momen
 
 where $m_s = \pm\frac{1}{2}$ is the quantum number corresponding to the spin states $\ket{\chi_+}$ and $\ket{\chi_-}$.
 
-\subsubsection*{Generalised angular momentum}
+\subsubsection{Ladder operators}
+
+In the case of orbital angular mometum $\vec{\hat{L}}$, we can define ladder operators $\hat{L_\pm} = \hat{L_x} \pm i\hat{L_y}$, with:
+
+\begin{align*} 
+[\hat{L^2}, \hat{L_\pm}] &= [\hat{L^2}, \hat{L_x}] \pm i[\hat{L^2}, \hat{L_y}] \\
+&= 0 \pm i (0) \\
+&= 0 
+\end{align*}
+
+Hence we can show:
+
+\[ \hat{L^2}(\hat{L_\pm}f_{\lambda, \mu}) = \lambda \hbar^2 \hat{L_\pm} f_{\lambda, \mu} \]
+
+Note that this does not imply that $\hat{L^2}$ and $\hat{L_\pm}$ have a common set of eigenstates, as $\hat{L_\pm}$ does not correspond to a physical observable as it is not Hermitian. 
+
+We also have:
+
+\begin{align*}
+[\hat{L_z}, \hat{L_\pm}] &= [\hat{L_z}, \hat{L_x}] \pm i[\hat{L_z}, \hat{L_y}] \\
+&= i\hbar\hat{L_y} \pm i(-i\hbar\hat{L_x}) \\
+&= i\hbar\hat{L_y} \pm \hbar\hat{L_x} \\
+&= \hbar (\pm\hat{L_x} + i\hat{L_y}) \\
+&= \pm\hbar(\hat{L_x} \pm i\hat{L_y}) \\
+&= \pm\hbar\hat{L_\pm}
+\end{align*}
+
+This allows us to show:
+
+\[ \hat{L_z}(\hat{L_\pm}f_{\lambda, \mu}) = (\mu \pm 1)\hbar \hat{L_\pm} f_{\lambda, \mu} \]
+
+So we see that ladder operators $\hat{L_\pm}$ increase and decrease the quantum number $\mu$ by $1$ respectively: ascending and descending the `ladder' of possible values.
+
+We have seen previously that $-\lambda \leq \mu \leq \lambda$, meaning there must be a top and bottom rung to the ladder, where $\hat{L_+}f_{\lambda, \mu_\text{max}} = 0$ and $\hat{L_-}f_{\lambda, \mu_\text{min}} = 0$. This leads us to find that $\lambda = \mu_\text{max}(\mu_\text{max} + 1) = \mu_\text{min}(\mu_\text{min} - 1)$ which implies $\mu_\text{min} = -\mu_\text{max}$, and that $\mu_\text{max} = \frac{N}{2}$ where $N$ is the number of rungs on the ladder. Hence we see that $\mu$ can take integer values between $-\lambda$ and $\lambda$.
+
+\subsubsection{Generalised angular momentum}
 
 We have seen that, in general, angular momentum operators obey a set of conditions. We can define a general angular momentum $\vec{\hat{J}}$ with total general angular momentum $\hat{J^2}$, where:
 
 \begin{itemize}
 	\item $\hat{J^2}$ and $\hat{J_z}$ have a common set of eigenfunctions $f_{j,m_j}$, with \[ \hat{J^2}f_{j,m_j} = j(j+1)\hbar^2 f_{j,m_j} \] \[ \hat{J_z}f_{j,m_j} = m_j\hbar f_{j,m_j} \]
-	\item A pair of ladder operators $\hat{J_\pm} = \hat{J_x} \pm i\hat{J_y}$ exist, with \[ \hat{J_Z}\hat{J_+}f_{j,m_j} = (m_j + 1)\hbar \hat{J_+} f_{j,m_j} \] \[ \hat{J_Z}\hat{J_-}f_{j,m_j} = (m_j - 1)\hbar \hat{J_-} f_{j,m_j} \] In other words, $\hat{J_+}$ raises $m_j$ by one, and $\hat{J_-}$ reduces $m_j$ by one.
-	\item $j$ can take integer and half-integer values: $j = 0, \frac{1}{2}, 1, \frac{3}{2}, 2, ...$
-	\item $m_j$ can take integer values, with $|m_j| \leq j$
+	\item A pair of ladder operators $\hat{J_\pm} = \hat{J_x} \pm i\hat{J_y}$ exist, with \[ \hat{J_z}\hat{J_+}f_{j,m_j} = (m_j + 1)\hbar \hat{J_+} f_{j,m_j} \] \[ \hat{J_z}\hat{J_-}f_{j,m_j} = (m_j - 1)\hbar \hat{J_-} f_{j,m_j} \] In other words, $\hat{J_+}$ raises $m_j$ by one, and $\hat{J_-}$ reduces $m_j$ by one.
+	\item $j$ can take integer \emph{or} half-integer values: $j = 0, 1, 2, ...$ or $j = \frac{1}{2}, \frac{3}{2}, \frac{5}{2}, ...$
+	\item $m_j$ runs in integer steps from $-j$ to $j$
 \end{itemize}
 
 We can deduce these last two points from the ladder operators (see course notes, §§12.3-12.5).
+
+\subsection{Theorems and Principles}
+\subsubsection{The uncertainty principle}
+
+The general uncertainty principle for two non-commutating operators is given by: (derivation in Appendix B of course notes)
+
+\[ \sigma_{A}^2 \sigma_{B}^2 \geq \left(\frac{1}{2i} \expval{[\hat{A}, \hat{B}]} \right)^2 = \left(\frac{1}{2i} \expval{\hat{A}\hat{B}} - \expval{\hat{B}\hat{A}} \right)^2\]
+
+In the case of $\hat{x}$ and $\hat{p}$, we know $\expval{[\hat{A}, \hat{B}]} = [\hat{A}, \hat{B}] = i\hbar$ so the above inequality leads to the well-known position-momentum uncertainty principle:
+
+\[ \sigma_x \sigma_p = \Delta x \Delta p \geq \frac{\hbar}{2} \]
+
+\subsubsection{Time evolution of expectation values}
+
+In general, taking the time derivative of an expectation value gives 
+
+\[ \frac{d\expval{\hat{Q}}}{dt} = \frac{d}{dt}\bra{\psi}\hat{Q}\ket{\psi} = \left(\frac{\partial\bra{\psi}}{\partial t}\right) \hat{Q}\ket{\psi} + \bra{\psi}\frac{\partial \hat{Q}}{\partial t}\ket{\psi} + \bra{\psi}\hat{Q}\left(\frac{\partial \ket{\psi}}{\partial t}\right) \]
+
+From the Schr\"odinger equation, we find
+
+\[ \frac{\partial\ket{\psi}}{\partial t} = -\frac{i\hat{H}}{\hbar}\ket{\psi} \]
+
+where $\hat{H}$ is the Hamiltonian. Taking the complex conjugate of both sides gives:
+
+\[ \frac{\partial \bra{\psi}}{\partial t} = \bra{\psi}\frac{i\hat{H}}{\hbar} \]
+
+Hence we find 
+
+\[ \frac{d \expval{\hat{Q}}}{d t} = \frac{i}{\hbar}\expval{[\hat{H}, \hat{Q}]} + \expval{\frac{\partial \hat{Q}}{\partial t}} \]
+
+\subsubsection{Ehrenfest theorems}
+
+Using the previous result for the time-dependence of the expectation of an operator to the position operator, with $\hat{H} = \frac{\hat{p}^2}{2m} + V(x)$ gives
+
+\[ \frac{d\expval{\hat{x}}}{dt} = \frac{i}{\hbar}\expval{[\hat{H}, \hat{x}]} + \expval{\frac{\partial \hat{x}}{\partial t}} \]
+
+Given that the position operator itself is time-independent, this reduces to
+
+\begin{align*} 
+	\frac{d\expval{\hat{x}}}{dt} &= \frac{i}{\hbar}\expval{[\hat{H}, \hat{x}]} \\
+	&= \frac{i}{\hbar}\expval{-i\hbar\frac{\hat{p}}{m}} = \frac{\expval{\hat{p}}}{m}
+\end{align*}
+
+This is the first Ehrenfest theorem. The second, given below, is derived similarly:
+
+\[ \frac{d\expval{\hat{p}}}{dt} = -\expval{\frac{dV}{dx}} \]
+
+\subsubsection{Virial theorem}
+
+Considering $\hat{Q} = \hat{x}\hat{p}$ and applying the time evolution equation, we find:
+
+\[ \frac{d\expval{\hat{x}\hat{p}}}{dt} = \expval{\frac{\hat{p}^2}{m} - \hat{x}\frac{dV}{dx}} \]
+
+For a state in equilibrium, $\frac{d\expval{\hat{x}\hat{p}}}{dt} = 0$ so
+
+\[ \expval{\frac{\hat{p}^2}{m}} = \expval{\hat{x}\frac{dV}{dx}} \]
+
+Or similarly
+
+\[ \expval{T} = \frac{1}{2}\expval{\hat{x}\frac{dV}{dx}} \]
+
+\subsubsection{The correspondance principle}
+
+The correspondance principle, as proposed by Niels Bohr in 1920, states that quantum mechanics will agree with classical mechanics in the limit of large quantum numbers (i.e. when dealing with large energies. 
