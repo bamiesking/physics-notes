@@ -1,0 +1,36 @@
+\subsection{Eigenfunctions of various potentials}
+
+\subsubsection{The infinite square well}
+
+The infinite square well is an ideal quantum potential given in one dimension by
+
+\[ V(x) = \left\{\begin{matrix}
+\infty & \text{if} & x < 0 \\
+0 & \text{if} & 0\leq x \leq L \\
+\infty & \text{if} & x > L 
+\end{matrix}\right. \]
+
+Hence the Schr\"odinger equation in an infinite potential well is:
+
+\[ -\frac{\hbar^2}{2m}\frac{d^2 \psi}{dx^2} = E\psi \]
+
+Solving this 2nd order ODE and applying the boundary condition $\psi(0) = 0$ gives:
+
+\[ \psi(x) = A\sin(kx)\text{, where } k = \frac{\sqrt{2mE}}{\hbar} \]
+
+Normalising and applying the boundary condition $\psi(L) = 0$ gives
+
+\[ \psi_n (x) = \sqrt{\frac{2}{L}}\sin(\frac{n\pi x}{L}) \text{ with } E = \frac{n^2 \pi^2 \hbar^2}{2m L^2} \]
+
+Adding the time dependence leads to the full energy eigenfunctions:
+
+\[ \Psi_n (x,t) = \psi_n (x) e^{-\frac{iE_n t}{\hbar}} = \sqrt{\frac{2}{L}}\sin(\frac{n\pi x}{L}) e^{-\frac{iE_n t}{\hbar}} \]
+
+
+
+
+\subsubsection{The linear harmonic oscillator}
+
+\subsection{Finding the Hydrogen Wavefunction}
+
+\subsubsection*{Hydrogen atom in a magnetic field}
