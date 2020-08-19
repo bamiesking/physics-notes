@@ -1,0 +1,538 @@
+\documentclass{../../physics_notes}
+
+\usepackage{makeidx}
+\usepackage{showidx}
+
+\title{Integral Transforms}
+%\author{St Aidan's Physics Society}
+\date{\today}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc}
+
+\newcommand{\intfty}{\int_{-\infty}^\infty}
+\newcommand{\zintfty}{\int_0^\infty}
+\newcommand{\F}[2]{\mathcal{F}\left[#1\right](#2)}
+\renewcommand{\Finv}[2]{\mathcal{F}^{-1}\left[#1\right](#2)}
+\newcommand{\intF}[3]{\frac{1}{\sqrt{2\pi}}\intfty #1 e^{i#3#2}d#2}
+\newcommand{\intFinv}[3]{\frac{1}{\sqrt{2\pi}}\intfty #1 e^{-i#3#2}d#3}
+\renewcommand{\L}[2]{\mathcal{L}\left[#1\right](#2)}
+\newcommand{\Linv}[2]{\mathcal{L}^{-1}\left[#1\right](#2)}
+\newcommand{\intL}[3]{\zintfty #1 e^{-#3#2}d#2}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\makeindex
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section*{Introduction}
+
+These notes are based on the Integral Transforms course delivered in Epiphany 2020, by Dr Daniel Cerdeño. 
+
+There are also frequent references, both explicit and otherwise, made to the book \emph{Mathematical Methods for Physics and Engineering} by K. F. Riley, M. P. Hobson, and S. J. Bence. Relevant chapters of the book are highlighted using coloured square brackets, e.g. \book{24.5}.
+
+Contributors: Ben Amies-King
+
+For a function $f: \mathbb{R} \rightarrow \mathbb{C}$, we define an integral transform:\index{integral transform}
+
+\begin{equation}
+g(\omega) = \int_a^b k(\omega, x) f(x) dx
+\end{equation}
+
+where the kernel (or propagator) $k(\omega, x)$ is a complex function of two real variables. \index{kernel}
+
+\section{Fourier Transforms}\index{Fourier transform}
+
+We define the Fourier transform, where:
+
+\begin{equation*}
+k(\omega, x) = \frac{1}{\sqrt{2\pi}} e^{i\omega x}
+\end{equation*}
+
+Hence:
+
+\begin{equation}
+\hat{f}(\omega) = \mathcal{F}[f(x)](\omega) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x) e^{i\omega x} dx
+\end{equation}
+
+The condition that $f(x)$ is sufficient to ensure that $\hat{f}(\omega)$ exists. An inverse transform $\mathcal{F}^{-1}: \hat{f} \rightarrow f$ exists if and only if $f$ is continuous. 
+
+Note that the choice of normalisation factor and exponential sign is arbitrary. 
+
+\subsection{Properties of the Fourier transform}
+
+\begin{enumerate}
+	\item{
+	\begin{align*}
+	\mathcal{F}\left[\frac{df}{dx}\right](\omega) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \frac{df}{fx} e^{i\omega x} dx \\
+	&= \left.\frac{f e^{i\omega x}}{\sqrt{2\pi}}\right|^{\infty}_{-\infty} - \frac{i\omega}{\sqrt{2\pi}}\int^\infty_{-\infty} f e^{i\omega x} dx \\
+	%&= \footnote{0}{As $f$ is square-integrable} - i\omega \mathcal{F}\left[f(x)\right](\omega)
+	&= 0 - i\omega \mathcal{F}\left[f(x)\right](\omega)
+	\end{align*}
+	}
+	\item{
+	\[\mathcal{F}\left[\frac{d^n f}{dx^n}\right](\omega) = (- i\omega)^n \mathcal{F}\left[f(x)\right](\omega)\]
+	}
+	\item{
+	\begin{align*}
+	\mathcal{F}\left[x f(x)\right](\omega) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty x f(x) e^{i\omega x} dx \\
+	%&\footnote{=}{$\frac{\partial}{\partial\omega}\left(e^{i\omega x}\right) = ixe^{i\omega x}$} \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \frac{f(x)}{i} \frac{\partial}{\partial\omega}\left(e^{i\omega x}\right) dx\\
+	&= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \frac{f(x)}{i} \frac{\partial}{\partial\omega}\left(e^{i\omega x}\right) dx\\
+	&= \frac{1}{i}\frac{d}{d\omega} \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x) e^{i\omega x} dx \\
+	&= \frac{1}{i} \frac{d}{d\omega}\mathcal{F}\left[f(x)\right](\omega)
+	\end{align*}
+	}
+	\item{
+	\begin{align*}
+	\mathcal{F}\left[f(ax)\right](\omega) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(ax)e^{i\omega x} dx \\
+	&= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x') e^{i\frac{\omega}{a}x'} \frac{dx'}{a} \\
+	&= \frac{1}{a}\mathcal{F}\left[f(x)\right]\left(\frac{\omega}{a}\right)
+	\end{align*}}
+	\item{
+	\begin{align*}
+	\mathcal{F}\left[f(x+a)\right](\omega) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x+a)e^{i\omega x} dx \\
+	&= e^{-i\omega a}\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x') e^{i\omega (x'-a)}dx' \\
+	&= e^{-i\omega a}\mathcal{F}\left[f(x)\right]\left(\omega\right)
+	\end{align*}}
+	\item{
+	\begin{align*}
+	\mathcal{F}\left[f(x) e^{iax}\right](\omega) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{iax}e^{i\omega x} dx \\
+	&= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) e^{i(a + \omega)x}dx \\
+	&=\mathcal{F}\left[f(x)\right]\left(\omega + a\right)
+	\end{align*}}
+	\item{For $f^\star(x) = f(x)$:
+	\begin{align*}
+	\left(\mathcal{F}\left[f(x) e^{iax}\right](\omega)\right)^\star &= \left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{i\omega x} dx \right)^\star\\
+	&= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f^\star(x)e^{-i\omega x} dx \\
+	&= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x)e^{-i\omega x} dx \\
+	&=\mathcal{F}\left[f(x)\right](-\omega)
+	\end{align*}}
+\end{enumerate}
+
+\begin{example}{Wave equation}
+
+\begin{equation*}
+\frac{d^2y(x,t)}{dx^2} = \frac{1}{v^2}\frac{d^2y(x,t)}{dt^2}
+\end{equation*}
+
+We define \[\mathcal{F}[y(x,t)](k,t) = \hat{y}(k,t)\] so \[\mathcal{F}\left[\frac{d^2y(x,t)}{dx^2}\right](k,t) = (-ik)^2\hat{y}(k,t)\] Hence \[\frac{d^2\hat{y}(k,t)}{dt^2} = -(kv)^2\hat{y}(k,t)\] This yields the solution \[\hat{y}(k,t) = A(k)e^{ikvt} + B(k)e^{-ikvt}\]
+
+We must then transform back into spacial coordinates:
+
+\begin{align*}
+y(x,t) &= \mathcal{F}^{-1}\left[A(k)e^{ikvt} + B(k)e^{-ikvt}\right](x,t) \\
+&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \left(A(k)E^{ikvt} + B(k)e^{-ikvt}\right)e^{-ikx} dk \\
+&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \left(A(k)E^{-ik(x - vt)} + B(k)e^{-ik(x + vt)}\right)dk \\
+\end{align*}
+\end{example}
+
+
+\subsection{$n$-dimensional Fourier transform}
+
+We can generalise this definition to an $n$-dimensional vector space:
+\index{n dimensional Fourier transform}
+\begin{equation}
+\hat{f}(\vec{\omega}) = \frac{1}{(2\pi)^{\frac{n}{2}}} \int_{-\infty}^\infty f(\vec{x}) e^{i\vec{\omega}\cdot\vec{x}} d^n x
+\end{equation}
+
+
+\subsection{Connection to Fourier series}
+\index{Fourier series}
+
+Consider a periodic function $f(x)$ over $[-L,L]$. We can write:
+
+\begin{equation}
+f(x) = a_0 + \sum_{n=1}^\infty \left(a_n \cos{\frac{n\pi x}{L}} + b_n \sin{\frac{n\pi x}{L}}\right)
+\end{equation}
+
+with 
+
+\begin{align*}
+a_0 &= \frac{1}{2L}\int_{-L}^{L} f(t) dt \\
+a_n &= \frac{1}{L}\int_{-L}^{L} f(t) \cos{\frac{n\pi t}{L}} dt \\
+b_n &= \frac{1}{L}\int_{-L}^{L} f(t) \sin{\frac{n\pi t}{L}} dt
+\end{align*}
+
+Substituting these expressions into the definiton of the series and applying the identity:
+
+\begin{equation*}
+\cos{\frac{n\pi x}{L}}\cos{\frac{n\pi t}{L}} + \sin{\frac{n\pi x}{L}}\sin{\frac{n\pi t}{L}} = \cos{\frac{n\pi}{L}(t-x)}
+\end{equation*}
+
+gives
+
+\begin{align*}
+f(x) &= \frac{1}{2L}\int_{-L}^{L} f(t)dt + \frac{1}{L}\sum_{n=1}^\infty \int_{-L}^L f(t) \cos{\frac{n\pi}{L}(t-x)} dt \\
+&= \frac{1}{2L}\int_{-L}^{L} f(t)dt + \frac{1}{2L}\sum_{n=1}^\infty \int_{-L}^L f(t) \left[ e^{\frac{in\pi}{L}(t-x)} + e^{-\frac{in\pi}{L}(t-x)} \right] dt \\
+&= \frac{1}{2L}\int_{-L}^L f(t) e^{\frac{in\pi}{L}(t-x)} \\
+\intertext{Defining $\omega_n = \frac{n\pi}{L}$, $\delta\omega = \omega_{n-1} - \omega_n = \frac{\pi}{L}$}
+&=\sum_{n=-\infty}^{\infty} \frac{\delta\omega}{2\pi} \int_{-L}^L f(t) e^{i\omega_n t} e^{-i\omega_n x} \\
+&\to \frac{1}{\sqrt{2\pi}}\int_{\infty}^\infty \left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{i\omega t}dt\right) e^{-i\omega x} d\omega \\
+\intertext{as $L\to\infty$}
+\end{align*}
+
+\begin{example}{Gaussian function}
+Let $f(x) = e^{-\frac{x^2}{2}}$. Then
+
+\begin{align*}
+\mathcal{F}\left[f(x)\right](\omega) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{-\frac{x^2}{2}} e^{i\omega x} dx \\
+&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{\frac{1}{2}(x - i\omega)^2 - \frac{\omega^2}{2}} dx \\
+&= \frac{e^{-\frac{\omega^2}{2}}}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{-\frac{1}{2}(x - i\omega)^2} dx
+\end{align*}
+
+For a contour $C_R = C_1 + C_2 + C_3 + C_4$, as $e^{-\frac{z^2}{2}}$ is entire, we have $\oint_{C_R} e^{-\frac{z^2}{2}} = 0$ from Cauchy's theorem.
+
+We need to evaluate 
+\[ \lim_{R\to\infty} \left(\int_{C_1} + \int_{C_2} + \int_{C_3} + \int_{C_4}\right)e^{-\frac{z^2}{2}}dz\]
+
+We see 
+\begin{align*}
+\int_{C_1} e^{-\frac{z^2}{2}} dz &\to \int_{-\infty}^\infty e^{-\frac{x^2}{2}} dx \\
+\int_{C_2} e^{-\frac{z^2}{2}} dz &= \int_{C_4} e^{-\frac{z^2}{2}} dz  = 0 \\
+\int_{C_3} e^{-\frac{z^2}{2}} dz &\to \int_{-\infty}^\infty e^{-\frac{(x-i\omega)^2}{2}} dx = I
+\end{align*}
+
+So $\mathcal{F}\left[e^{-\frac{x^2}{2}}\right] = e^{-\frac{\omega^2}{2}}$, meaning the Fourier transform of a Gaussian is a Gaussian in the transformed variable.
+\end{example}
+
+\subsection{Convolutions}
+
+Consider two functions $f(x)$ and $g(x)$ with respective Fourier trasnforms $\hat{f}(\omega)$ and $\hat{g}(\omega)$. We define the convolution of $f$ and $g$ as 
+
+\begin{equation}\label{eq:f_convolution}
+f(x) \star g(x) = \frac{1}{\sqrt{2\pi}}\intfty g(y)f(x-y)dy
+\end{equation}
+
+We can express $f(x-y$ using the definition of the inverse Fourier transform:
+
+\begin{align*}
+f(x) \star g(x) &= \frac{1}{\sqrt{2\pi}} \intfty g(y) \left(\intFinv{\hat{f}{\omega}}{(x-y)}{\omega}\right) \\
+&= \intFinv{\hat{f}(\omega) \left(\intF{g(y)}{y}{\omega}\right)}{x}{\omega} \\
+&= \intFinv{\hat{f}(\omega)\hat{g}(\omega)}{x}{\omega} \\
+&= \Finv{\hat{f}(\omega)\hat{g}(\omega)}{x} \\
+\intertext{Applying the Fourier transform to both sides:} \\
+\F{f(x) \star g(x)}{\omega} &= \hat{f}(\omega)\hat{g}(\omega)
+\end{align*}
+
+\begin{example}{}
+Consider the differential equation \[f''(x) - f(x) = e^{-x^2}\] The homogeneous solution is \[f_0(x) = Ae^x + Be^{-x}\]
+
+The third particular solution can be found by applying the Fourier transform to each side:
+\begin{align*}
+\F{f''(x) - f(x)}{\omega} &= \F{e^{-x^2}}{\omega} \\
+(-i\omega)^2\hat{f}(\omega) - \hat{f}(\omega) &= \F{e^{-x^2}}{\omega} \\
+\hat{f}(\omega) &= -\frac{1}{1+\omega^2}\cdot\F{e^{-x^2}}{\omega} \\
+\intertext{So by application of the convolution theorem:} \\
+f(x) &= -e^{-x^2} \star \Finv{\frac{1}{1+\omega^2}}{x}
+\end{align*}
+
+We can evaluate the inverse Fourier transform using complex analysis, by considering a contour:
+
+\begin{equation*}
+C_R = \begin{cases}[0,R]\cup\left\{\frac{R}{2}\left(1 + e^{i\theta}\right)\right\},\theta\in\left[0,-\pi\right) & \text{ for } x \geq 0 \\ [-R,0]\cup\left\{\frac{R}{2}\left(-1 + e^{i\theta}\right)\right\},\theta\in\left[0,\pi\right) & \text{ for } x <\geq> 0 \end{cases}
+\end{equation*}
+
+This leads to
+
+\begin{align*}
+\Finv{\frac{1}{1+\omega^2}}{x} &= \intFinv{\frac{1}{1+\omega^2}}{x}{\omega} \\
+&= \frac{1}{\sqrt{2\pi}} 2\pi i\left(\left.-Res\left[\frac{e^{-i\omega x}}{1+\omega^2}\right]_{x=-i}\right|_{x\geq 0} + \left.Res\left[\frac{e^{-i\omega x}}{1+\omega^2}\right]_{x=i}\right|_{x < 0} \right) \\
+&= \sqrt{\frac{\pi}{2}}\left(\left.e^{-x}\right|_{x\geq 0} + \left. e^x\right|_{x<0}\right) \\
+&= \sqrt{\frac{\pi}{2}}e^{|x|}
+\end{align*}
+
+So 
+\begin{align*}
+f(x) &= -e^{-x^2} \star \sqrt{\frac{\pi}{2}}e^{-|x|} \\
+&= -\frac{1}{2}\intfty e^{-(x-y)^2}e^{-|y|} dy
+\end{align*}
+\end{example}
+
+\subsection{Parseval's Theorem}
+
+\begin{theorem}{Parseval's Theorem}
+$\intfty f^\star(x)g(x)dx = \intfty \hat{f}(\omega)\hat{g}(\omega)d\omega$
+\end{theorem}
+
+We see, using a property of the Dirac $\delta$-function \ref{sec:dirac_delta}:
+
+\begin{align*}
+\intfty f^\star(x)g(x)dx &= \intfty \left(\Finv{\hat{f}(\omega)}{x}\right)^\star \Finv{\hat{g}(\omega)}{x} dx \\
+&= \frac{1}{2\pi}\intfty dx \intfty \hat{f}^\star(\omega)e^{i\omega x} d\omega \intfty \hat{g}(\omega') e^{-i\omega' x} d\omega' \\
+&= \intfty \intfty \intfty dx d\omega d\omega' \hat{f}^\star (\omega) \hat{g}(\omega') e^{-ix(\omega' - \omega)}
+&= \intfty \intfty d\omega d\omega' \hat{f}^\star(\omega) \hat{g}(\omega') \delta(\omega' - \omega) \\
+&= \intfty \hat{f}^\star(\omega)g(\omega) d\omega
+\end{align*}
+
+Note that if we take $g(x) = f(x)$, the Parseval theorem shows that normalisation is consered by the Fourier transform.
+
+The Fourier transform is thus a unitary operation in the Hilbert space $\mathbb{L}^2$ of square-integrable functions, and the PArseval theorem is a manifestation of this property.
+
+\begin{example}{$I = \int_{0}^\infty \frac{d\omega}{(a^2 + \omega^2)^2}$}
+
+Define $k = \frac{\omega}{a}$. Thus:
+
+\[ I \to \frac{1}{2a^3}\intfty \frac{dk}{(1 + k^2)^2} \]
+
+We know $\Finv{\frac{1}{1+k^2}}{x} = \sqrt{\frac{\pi}{2}} e^{|x|}$, hence by Parseval's theorem:
+
+\begin{align*}
+\intfty \frac{dk}{(1+k^2)^2} &= \intfty \left(\sqrt{\frac{\pi}{2}}e^{-|x|}\right)^2 dx \\
+&= \pi\int_{0}^\infty e^{-2x} dx \\
+&= \frac{\pi}{2}
+\end{align*}
+
+So $I = \frac{\pi}{4a^3}$
+\end{example}
+
+
+
+\subsection{Solving Integral Equations}
+
+The Fourier transform can also be used to solve integral equations that involve convolution of functions. Consider
+
+\[ h(x) = e^{i3x} + \intfty e^{-|y|}h(x-y)dy \]
+
+Noticing that the integral on the right-hand side is a convolution, we can apply the Fourier transform to obtain
+
+\begin{align*}
+\hat{h}(\omega) &= \sqrt{2\pi} \delta(\omega + 3) + \frac{2}{1+w^2} \hat{h}(\omega) \\
+\intertext{ which can be written }
+&= \sqrt{2\pi} \delta(\omega + 3)\left(1 + \frac{2}{1+w^2} \hat{h}(\omega)\right)^{-1}
+\end{align*}
+
+Inverting this relation gives
+\begin{align*}
+h(x) &= \intF{\sqrt{2\pi} \delta(\omega + 3)\left(1 + \frac{2}{1+w^2} \hat{h}(\omega)\right)^{-1}}{x}{\omega} \\
+&= \frac{5}{4}e^{i3x}
+\end{align*}
+
+\subsection{Discrete Fourier Transforms} \index{discrete Fourier transform}
+
+For a function $h(t)$ with period $T$, we can perform a set of measurements $h_j$ within a period. We will consider $h_j$ to be an even number of points $2N$ sampled at times $t_j = j\frac{T}{2N}$.
+
+The discrete Fourier transform (DFT) for this set of data is
+
+\begin{equation}\label{eq:dft}
+\hat{h}(\omega_p) = \frac{1}{\sqrt{2N}}\sum_{j=0}^{2N-1} h_j e^{i\omega_p t_j}
+\end{equation}
+
+where $\omega_p = \frac{2\pi p}{T}$ with $0 \leq p \leq 2N-1$.
+
+Notice that this decomposition includes as many frequencies as time measurements were performed. We can invert this relation:
+
+\begin{equation*}\label{eq:inv_dft}
+h^{DFT}(t) = \frac{1}{\sqrt{2N}}\sum_{p=0}^{2N-1} \hat{h}_p e^{-i\omega_p t}
+\end{equation*}
+
+Note that $h^{DFT}$ is defined for all $t$, with $h^{DFT} \to h$ as $N\to\infty$.
+
+\subsection{The Fourier Matrix}\index{Fourier matrix}
+
+We can express the above procedure in terms of the Fourier matrix:
+
+\begin{equation*}
+\begin{pmatrix} \hat{h}_1 \\ \vdots \\ \hat{h}_{2N-1} \end{pmatrix} = F(2N)_{p_j} \begin{pmatrix} h_1 \\ \vdots \\ h_{2N-1} \end{pmatrix}
+\end{equation*}
+
+where
+\begin{equation}
+F(2N)_{p_j} = \left(\frac{e^{i\omega_p t_j}}{\sqrt{2N}}\right) = \left(\frac{e^{i\pi p j/N}}{\sqrt{2N}}\right)
+\end{equation}
+is the Fourier matrix which provides the basis of plane waves in which the signal is expanded.
+
+\begin{example}{}
+Consider the periodic signal $h(t) = \cos{t}$, with period $T = 2\pi$. Using the following measurements, N = 2:
+
+
+\begin{tabular}{c || c | c | c}
+$t$ & $h(t)$ & $p$ & $\omega_p$ \\
+\hline
+$0$ & $1$ & $0$ & $\frac{0}{T} = 0$ \\
+$\frac{\pi}{2}$ & $0$ & $1$ & $\frac{2\pi}{T} = 1$ \\
+$\pi$ & $-1$ & $2$ & $\frac{4\pi}{T} = 2$ \\
+$\frac{3\pi}{2}$ & $0$ & $3$ & $\frac{6\pi}{T} = 3$
+\end{tabular}
+
+So
+
+\begin{equation*}
+\begin{pmatrix} \hat{h}_0 \\ \hat{h}_1 \\ \hat{h}_2 \\ \hat{h}_3 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & i & -1 & -i \\ 1 & -1 & 1 & -1 \\ 1 & -i & -1 & i\end{pmatrix}\begin{pmatrix} 1 \\ 0 \\ -1 \\ 0\end{pmatrix}
+\end{equation*}
+
+We can now apply the inverse DFT to obtain
+
+\begin{align*}
+\hat{h}(t) &= \frac{1}{2}\sum_{p=0}^{2N-1} \hat{h}_p e^{-i\omega_p t} \\
+&= \frac{1}{2}\left( 0\cdot e^{-0\cdot it} + 1\cdot e^{-1\cdot it} + 0\cdot e^{-2\cdot it} + 1\cdot e^{-3\cdot it}\right) \\
+\intertext{Given that the function is real:} \\
+h(t) &= \frac{1}{2}\left(\cos{t} + \cos{3t}\right)
+\end{align*}
+\end{example}
+
+\section{Laplace Transforms} \index{Laplace transform}
+
+The Laplace transform is an integral transform with kernel $k(t,s) = e^{-ts}$, defined:
+
+\begin{equation}
+\L{f(t)}{s} \equiv \bar{f}(s) = \intL{f(t)}{t}{s}
+\end{equation}
+
+which is typically defined for $s>0$.
+
+We have the following standard results:
+
+\begin{enumerate}
+	\item{}
+\end{enumerate}
+
+\begin{example}
+\begin{align*}
+\L{1}{s} &= \intL{}{t}{s} \\
+&= \frac{1}{s} \, s>0
+\end{align*}
+\end{example}
+
+\begin{example}
+\begin{align*}
+\L{e^{at}}{s} &= \intL{e^{at}}{t}{s} \\
+&= \zintfty e^{-(s-a)t dt \\
+&= \frac{1}{s-a} \, s>a
+\end{align*}
+\end{example}
+
+\subsection{Link to Fourier Transform}
+
+We can relate the Laplace transform to the Fourier transform by assuming $s=x+iy$:
+
+\begin{align}
+\L{f(t)}{s} &= \intL{f(t)}{t}{s} \nonumber \\
+&= \zintfty f(t) e^{-(x+iy)t} dt \nonumber \\
+&= \zintfty f(t) e^{-xt} e^{-iyt} dt \nonumber \\
+&= \intfty f(t) e^{-xt} H(t)e^{iyt} dt \nonumber \\
+&= \Finv{f(t)H(t)e^{-xt}}{y}
+\end{align}
+
+\begin{example}
+\begin{align*}
+\L{\frac{df}{dt}}{s} &= \intL{\frac{df}{dt}}{t}{s} \\
+&= \underbrace{\left. f(t)e^{-st}\right|^\infty_0}{-f(0) \text{ by convergence.}} - \zintfty f(t)\frac{\partial e^{-st}}{\partial t} dt \\
+&= -f(0) + s\zintfty f(t) e^{-st} dt \\
+&= s\L{f(t)}{s} - f(0)
+\end{align*}
+\end{example}
+
+In general:
+\begin{equation*}
+\L{\frac{d^n f}{dt^n}}{s} = s^n\L{f(t)}{s} - \sum_{k=0}^{n-1} s^{n-1-k}f^{(k)}(0)
+\end{equation*}
+
+\begin{example}{$f(t) = \sinh{kt} = \frac{1}{k}\frac{\partial \cosh{kt}}{\partial t}$}
+\begin{align*}
+\L{\sinh{kt}}{s} &= \frac{1}{k}\L{\frac{\partial}{\partial t}\cosh{kt}}{s} \\
+&= \frac{s}{k}\L{\cosh{kt}}{s} - \frac{1}{k}\cosh{0} \\
+&= \frac{1}{k}\left(\frac{s^2}{s^2 - k^2} - 1\right) \\
+&= \frac{k}{s^2 - k^2} \, s>|k|
+\end{align*}
+\end{example}
+
+The Laplace transform can also be a useful tool in solving integrals.
+
+\begin{example}{$f(t) = \zintfty \frac{\sin{tx}{x}}dx$}
+\begin{align*}
+\bar{f}(s) &= \L{\zintfty \frac{\sin{tx}{x}}}{s} \\
+&= \zintfty dt \zintfty\frac{\sin{tx}}{x}e^{-st} dx \\
+&= \zintfty \L{\sin{tx}}\frac{dx}{x} \\
+&= \zintfty \frac{1}{s^2 + x^2} dx \\
+&= \frac{\pi}{2s}
+\end{align*}
+
+So for $t>0$ we have $f(t) = \frac{\pi}{2}$. For $t<0$ we use $\sin{-t} = -\sin{t}$ to obtain $f(t) = -\frac{\pi}{2}$. Hence $f(t) = \frac{\pi}{2}\sgn{t}
+\end{example}
+
+
+\subsection{Laplace Transforms of Periodic Functions}
+
+
+\section{The Dirac $\delta$-function}\label{sec:dirac_delta}
+
+The Dirac $\delta$-function is commonly defined as follows:
+
+\begin{enumerate}
+	\item $\delta(x) = 0$ if $x\neq 0$
+	\item $\int_{-\infty}^\infty \delta(x) dx = 1$
+	\item $\int_{-\infty}^\infty \delta(x) f(x) dx = f(0)$
+\end{enumerate}
+
+In order to obtain a more rigorous definition, we consider a sequence of functions:
+
+\begin{equation*}
+f_n = \frac{n}{\sqrt{\pi}}e^{-n^2x^2}
+\end{equation*}
+
+As $n\to\infty$, $f_n$ replicates the behaviour of the $\delta$-function.
+
+Similarly, we can define it as the limit as $n\to\infty$ of
+
+\begin{equation*}
+g_n(x) = \frac{n}{\pi}\frac{1}{1+n^2x^2}
+\end{equation*}
+
+We see:
+
+\begin{enumerate}
+	\item{\[\lim_{n\to\infty}g_n(x) = \begin{cases} 0 & \text{ if } x\neq0 \\ \infty & \text{ if } x=0\end{cases}\]}
+	\item{
+	\begin{align*} \lim_{n\to\infty}\int_{-\infty}^\infty g_n(x)dx &= \lim_{n\to\infty}\int_{-\infty}^\infty \frac{n}{\pi}\frac{1}{1+n^2x^2}dx \\
+	&= \frac{2\cancel{\pi} i}{\cancel{\pi}}Res\left(\frac{1}{n^2(z+\frac{i}{n})(z-\frac{i}{n})}\right)_{z=\frac{i}{n}} \\
+	&= 1
+	\end{align*}}
+	\item{
+	\begin{align*} \lim_{n\to\infty}\int_{-\infty}^\infty g_n(x)f(x)dx &= \lim_{n\to\infty}\int_{-\infty}^\infty \frac{n}{\pi}\frac{f(x)}{1+n^2x^2}dx \\
+	&= \frac{2\cancel{\pi} i}{\cancel{\pi}}Res\left(\frac{f(x)}{n^2(z+\frac{i}{n})(z-\frac{i}{n})}\right)_{z=\frac{i}{n}} \\
+	&= f\left(\frac{i}{n}\right) \stackrel{n\to\infty}{\longrightarrow} f(0)
+	\end{align*}}
+\end{enumerate}
+
+There are many other similar sequences of functions which we could use. The fact that we must define the Dirac $\delta$-function in this way means that it is a distribution.
+
+\subsection{Properties of the Dirac $\delta$-function}
+\begin{enumerate}
+	\item{$\delta(-x) = \delta(x)$}
+	\item{$\delta(x-a)f(x) = \delta(x-a)f(a)$ if $f$ is continuous at $x=a$}
+	\item{If a function $g(x)$ has at most simple zeros $x_i$ then \begin{equation*}\delta(g(x)) = \sum_{x_i} \frac{\delta(x-x_i)}{\left|g'(x_i)\right|}\end{equation*}}
+	\item{$\delta(ax) = \frac{\delta(x)}{\|a\|}$}
+	\item{The Dirac $\delta$-function is differentiable, with: \begin{align*}\int_{-\infty}^\infty \delta '(x)f(x)dx &= \left. f(x)\delta(x)\right|_{-\infty}^\infty - \int_{-\infty}^\infty \delta(x) f'(x) dx \\ &= -f'(0) \\ \intertext{where $f(x)$ vanishes at $\pm\infty$. Similarly, for higher orders:} \intfty \delta^n (x)f(x)dx = (-1)^n f^{(n)}(0) \end{align*}}
+	\item{$H'(x) = \delta(x)$, where $H(x)$ is the Heaviside step function, defined: \begin{equation} H(x) = \begin{cases} 1 & x\geq 0 \\ 0 & x < 0 \end{cases}\end{equation}}
+\end{enumerate}
+\subsection{Fourier Representation of the Dirac $\delta$-function}
+
+We see:
+
+\begin{align*}
+\F{\delta(x)}{\omega} &= \intF{x}{\omega}{\delta(x)} \\
+&= \frac{1}{\sqrt{2\pi}}
+\end{align*}
+
+Applying the inverse transform, we obtain:
+\begin{align*}
+\Finv{\hat{\delta}(\omega)}{x} &= \intFinv{x}{\omega}{\frac{1}{\sqrt{2\pi}}} \\
+&= \frac{1}{2\pi}\intfty{e^{-i\omega x} d\omega}
+\end{align*}
+
+So we can show:
+\begin{enumerate}
+	\item{$\F{1}{\omega} = \sqrt{2\pi}\delta(\omega)$}
+	\item{$\F{e^{i\alpha x}}{\omega} = \intF{e^{i\alpha x}}{x}{\omega} = \sqrt{2\pi}\delta(\omega + \alpha)$}
+\end{enumerate}
+
+
+\newpage
+\printindex
+\end{document}
