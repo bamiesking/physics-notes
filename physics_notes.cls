@@ -30,8 +30,17 @@
 \newcommand{\curl}{\vec{\nabla} \times}
 
 \newcommand{\book}[1]{\textcolor{red}{[§#1]}}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\counterwithin{equation}{section}
 
 \newcounter{example}[section]
 \newenvironment{example}[1]
 {\refstepcounter{example}\bigskip\noindent
-   \textbf{Example~\thesection.\theexample \; #1}\newline\newline\rmfamily\medskip}{\medskip}
+   \textbf{Example~\thesection.\theexample \; \normalfont{#1}}\newline\newline\rmfamily\medskip}{\medskip}
+
+\newenvironment{theorem}[1]
+{\refstepcounter{example}\bigskip\noindent
+   \textbf{Theorem~\thesection.\theexample \; \normalfont{#1}}\newline\newline\rmfamily\medskip}{\medskip}
+
+
