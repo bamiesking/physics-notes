@@ -91,6 +91,11 @@ Unless you are a LaTeX prodigy, it is inevitable that you will want to test chan
 
 Use 'm.' at the start of a commit to show a minor edit. e.g. spelling, format...
 
-Comment using '%' to show discussion within a file directly before the line it references.
+Comment using '%' to show discussion within a file directly before the line it references. For example:
+
+```latex
+% Import siunitx package
+\usepackage{siunitx}
+```
 
 If you make use of custom environments extensively, first consider whether there is an existing solution in the custom `physics_notes.cls` class file. If not, you may wish to make additions to it on the branch you are currently working on. Ensure any changes will not break features used elsewhere in the repository, or pull requests will not be approved.
