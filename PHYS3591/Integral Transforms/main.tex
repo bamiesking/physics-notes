@@ -392,17 +392,17 @@ We have the following standard results:
 	\item{}
 \end{enumerate}
 
-\begin{example}
+\begin{example}{}
 \begin{align*}
-\L{1}{s} &= \intL{}{t}{s} \\
+\L{1}{s} &= \intL{1}{t}{s} \\
 &= \frac{1}{s} \, s>0
 \end{align*}
 \end{example}
 
-\begin{example}
+\begin{example}{}
 \begin{align*}
 \L{e^{at}}{s} &= \intL{e^{at}}{t}{s} \\
-&= \zintfty e^{-(s-a)t dt \\
+&= \zintfty e^{-(s-a)t} dt \\
 &= \frac{1}{s-a} \, s>a
 \end{align*}
 \end{example}
@@ -419,7 +419,7 @@ We can relate the Laplace transform to the Fourier transform by assuming $s=x+iy
 &= \Finv{f(t)H(t)e^{-xt}}{y}
 \end{align}
 
-\begin{example}
+\begin{example}{}
 \begin{align*}
 \L{\frac{df}{dt}}{s} &= \intL{\frac{df}{dt}}{t}{s} \\
 &= \underbrace{\left. f(t)e^{-st}\right|^\infty_0}{-f(0) \text{ by convergence.}} - \zintfty f(t)\frac{\partial e^{-st}}{\partial t} dt \\
@@ -444,16 +444,16 @@ In general:
 
 The Laplace transform can also be a useful tool in solving integrals.
 
-\begin{example}{$f(t) = \zintfty \frac{\sin{tx}{x}}dx$}
+\begin{example}{$f(t) = \zintfty \frac{\sin{tx}}{x}dx$}
 \begin{align*}
-\bar{f}(s) &= \L{\zintfty \frac{\sin{tx}{x}}}{s} \\
+\bar{f}(s) &= \L{\zintfty \frac{\sin{tx}}{x}}{s} \\
 &= \zintfty dt \zintfty\frac{\sin{tx}}{x}e^{-st} dx \\
-&= \zintfty \L{\sin{tx}}\frac{dx}{x} \\
+&= \zintfty \L{\sin{tx}}{s}\frac{dx}{x} \\
 &= \zintfty \frac{1}{s^2 + x^2} dx \\
 &= \frac{\pi}{2s}
 \end{align*}
 
-So for $t>0$ we have $f(t) = \frac{\pi}{2}$. For $t<0$ we use $\sin{-t} = -\sin{t}$ to obtain $f(t) = -\frac{\pi}{2}$. Hence $f(t) = \frac{\pi}{2}\sgn{t}
+So for $t>0$ we have $f(t) = \frac{\pi}{2}$. For $t<0$ we use $\sin{-t} = -\sin{t}$ to obtain $f(t) = -\frac{\pi}{2}$. Hence $f(t) = \frac{\pi}{2}\sgn{t}$
 \end{example}
 
 
