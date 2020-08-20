@@ -1,0 +1,18 @@
+name: Build LaTeX document
+on:
+  push:
+    branches: 
+      - 'maths-workshop'
+jobs:
+  build_latex:
+    strategy:
+      matrix:
+        file: ['PHYS3591/Complex Analysis/main.tex', 'PHYS3591/Integral Transforms/main.tex']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: ${{ matrix.file }}
