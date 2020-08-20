@@ -2,13 +2,21 @@ name: Build LaTeX document
 on: pull_request
 jobs:
   build_latex:
+    strategy:
+      matrix:
+        file: ${{ steps.files.outputs.content }}
     runs-on: ubuntu-latest
     steps:
+      - name: Read files.json
+        id: files
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: files.json
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: main.tex
+          root_file: ${{ matrix.file }}
 
 
